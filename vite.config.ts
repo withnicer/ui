@@ -19,13 +19,12 @@ const external = [
 export default defineConfig({
   plugins: [react()],
 
-  // `vp build`: one ES module, its CSS in dist/styles.css. Declarations come
+  // `vp build`: one ES module. Styles ship as Sass source. Declarations come
   // from tsc (see the build script).
   build: {
     lib: {
       entry: "./src/index.ts",
       fileName: () => "index.js",
-      cssFileName: "styles",
       formats: ["es"],
     },
     rollupOptions: {

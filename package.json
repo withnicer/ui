@@ -9,11 +9,13 @@
   },
   "files": [
     "dist",
-    "src/utils/dial-codes.json",
-    "src/styles/fonts"
+    "src/styles",
+    "src/assets",
+    "src/utils/dial-codes.json"
   ],
   "type": "module",
   "sideEffects": [
+    "*.sass",
     "*.css"
   ],
   "main": "./dist/index.js",
@@ -23,7 +25,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./styles.css": "./dist/styles.css",
+    "./styles.sass": "./src/styles/styles.sass",
     "./dial-codes.json": "./src/utils/dial-codes.json",
     "./fonts/*": "./src/styles/fonts/*"
   },
@@ -31,7 +33,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp build && tsc -p tsconfig.app.json --noEmit false --emitDeclarationOnly --outDir dist",
+    "build": "vp build && tsc -p tsconfig.app.json --noEmit false --emitDeclarationOnly --rootDir src --outDir dist",
     "check": "vp check",
     "dev": "vp dev",
     "fix": "vp check --fix",
@@ -53,7 +55,6 @@
     "jsdom": "^30.0.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "sass": "^1.102.0",
     "semantic-release": "^26.0.1",
     "styled-components": "^6.5.3",
     "typescript": "^7.0.2",
@@ -64,7 +65,13 @@
   "peerDependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "sass": "^1.102.0",
     "styled-components": "^6.5.3"
+  },
+  "peerDependenciesMeta": {
+    "sass": {
+      "optional": true
+    }
   },
   "overrides": {
     "vite": "npm:@voidzero-dev/vite-plus-core@8.3.8000"

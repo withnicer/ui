@@ -8,6 +8,7 @@ Nicer's design system: the React 19 components, design tokens and global styles 
 
 ```sh
 bun add @withnicer/ui react react-dom styled-components
+bun add -d sass
 ```
 
 React, React DOM and styled-components are peer dependencies, so the app and the kit share one copy of each (one React context, one theme).
@@ -23,7 +24,7 @@ The Nicer apps install it under its old name, so their imports stay `@nicer/ui`:
 Load the styles once, at the app root, then import components:
 
 ```tsx
-import "@withnicer/ui/styles.css";
+import "@withnicer/ui/styles.sass";
 import { Button, ThemeProvider } from "@withnicer/ui";
 
 export const App = () => (
@@ -38,7 +39,7 @@ export const App = () => (
 | Entry | Contents |
 | --- | --- |
 | `@withnicer/ui` | Components, contexts, hooks and utilities, all listed in [`src/index.ts`](src/index.ts) |
-| `@withnicer/ui/styles.css` | Tokens, typography, dark mode, the reset, the icon font and The Seasons and Inter fonts |
+| `@withnicer/ui/styles.sass` | Tokens, typography, dark mode, the reset, the icon font and The Seasons and Inter fonts |
 | `@withnicer/ui/dial-codes.json` | Country dial codes with flags, for phone inputs |
 | `@withnicer/ui/fonts/<file>` | The Seasons font files (for PDFs and canvases that need a URL) |
 
@@ -56,7 +57,7 @@ The toolchain is [Vite+](https://viteplus.dev) (`vp`) with bun as the package ma
 | `vp dev` | Start the Vite dev server |
 | `vp check` | Format check, lint ([Ultracite](https://www.ultracite.ai) rules on Oxlint) and type check |
 | `vp check --fix` | Format and apply safe lint fixes |
-| `vp run build` | Build `dist/` (ES module, `styles.css`, type declarations) |
+| `vp run build` | Build `dist/` (ES module and type declarations) |
 | `vp test` | Run the unit tests |
 
 ## Release

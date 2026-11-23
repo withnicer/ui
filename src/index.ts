@@ -1,6 +1,3 @@
-// Styles
-import "./styles/styles.sass";
-
 // Components
 export * from "./components/Actions";
 export { default as Actions } from "./components/Actions";
