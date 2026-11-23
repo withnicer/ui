@@ -1,11 +1,8 @@
-import {
-  type InputEvent,
-  type InputHTMLAttributes,
-  useRef,
-  useState,
-} from "react";
+import { useRef, useState } from "react";
+import type { InputEvent, InputHTMLAttributes } from "react";
 
-import Dropdown, { type DropdownOption } from "./Dropdown";
+import Dropdown from "./Dropdown";
+import type { DropdownOption } from "./Dropdown";
 import Spinner from "./Spinner";
 import TextInput from "./TextInput";
 

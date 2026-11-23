@@ -1,4 +1,5 @@
-import { type RefObject, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import type { RefObject } from "react";
 import { createPortal } from "react-dom";
 
 import Icon from "./Icon";
@@ -30,7 +31,9 @@ export default function Actions({
   // Close on outside click
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (listRef.current?.contains(e.target as Node)) return;
+      if (listRef.current?.contains(e.target as Node)) {
+        return;
+      }
       if (triggerRef?.current?.contains(e.target as Node)) {
         setVisible(true);
       } else {
@@ -47,7 +50,9 @@ export default function Actions({
 
   // Track trigger position with rAF; close if trigger scrolls out of view
   useEffect(() => {
-    if (!visible || !triggerRef?.current) return;
+    if (!visible || !triggerRef?.current) {
+      return;
+    }
 
     let frameId: number;
 
@@ -77,7 +82,9 @@ export default function Actions({
     return () => cancelAnimationFrame(frameId);
   }, [visible, triggerRef]);
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return createPortal(
     <ul
@@ -100,7 +107,9 @@ export default function Actions({
             key={i}
             onClick={(e) => {
               e.stopPropagation();
-              if (option.disabled) return;
+              if (option.disabled) {
+                return;
+              }
               setVisible(false);
               option.action();
             }}
@@ -108,7 +117,9 @@ export default function Actions({
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 e.stopPropagation();
-                if (option.disabled) return;
+                if (option.disabled) {
+                  return;
+                }
                 setVisible(false);
                 option.action();
               }

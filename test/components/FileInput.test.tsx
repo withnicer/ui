@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { act } from "react";
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 
 import FileInput from "../../src/components/FileInput";
 import { getByText, queryAllByText, render } from "../support/render";

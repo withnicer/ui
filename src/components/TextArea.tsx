@@ -1,9 +1,5 @@
-import {
-  type ChangeEvent,
-  type TextareaHTMLAttributes,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
+import type { ChangeEvent, TextareaHTMLAttributes } from "react";
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;

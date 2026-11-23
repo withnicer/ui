@@ -33,8 +33,12 @@ const cleanUrl = (value: string, page = false): string => {
     const path = url.pathname
       .split("/")
       .map((segment) => {
-        if (!segment) return segment;
-        if (page) return PAGE_SEGMENTS.has(segment) ? segment : ":id";
+        if (!segment) {
+          return segment;
+        }
+        if (page) {
+          return PAGE_SEGMENTS.has(segment) ? segment : ":id";
+        }
         return /@|%|\d{5,}/.test(segment) || segment.length > 48
           ? ":id"
           : segment;
@@ -63,11 +67,15 @@ const cleanValue = (key: string, value: unknown): unknown => {
         : "Error",
     };
   }
-  if (typeof value !== "string") return value;
+  if (typeof value !== "string") {
+    return value;
+  }
   if (["details", "metadata", "SessionMetadata"].includes(key)) {
     return JSON.stringify(JSON.parse(value), cleanValue);
   }
-  if (/^(pageId|parentPageId)$/i.test(key)) return cleanUrl(value, true);
+  if (/^(pageId|parentPageId)$/i.test(key)) {
+    return cleanUrl(value, true);
+  }
   if (
     /^(url|name|filename|referrer|documentURL)$/i.test(key) &&
     /^(https?:|\/)/.test(value)

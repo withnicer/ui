@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
-import { act, type ComponentProps, useState } from "react";
-import { expect, it, vi } from "vitest";
+import { act, useState } from "react";
+import type { ComponentProps } from "react";
+import { expect, it, vi } from "vite-plus/test";
 
 import Autocomplete from "../../src/components/Autocomplete";
 import {

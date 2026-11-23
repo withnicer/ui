@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import { useState } from "react";
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 
-import CardInput, { type CardInputProps } from "../../src/components/CardInput";
+import CardInput from "../../src/components/CardInput";
+import type { CardInputProps } from "../../src/components/CardInput";
 import { change, getByPlaceholderText, render } from "../support/render";
 
 type Card = NonNullable<CardInputProps["data"]>;

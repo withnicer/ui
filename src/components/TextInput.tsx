@@ -1,4 +1,5 @@
-import { type InputHTMLAttributes, useId } from "react";
+import { useId } from "react";
+import type { InputHTMLAttributes } from "react";
 
 import Icon from "./Icon";
 import Spinner from "./Spinner";

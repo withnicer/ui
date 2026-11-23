@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { act } from "react";
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 
 import NumberInput from "../../src/components/NumberInput";
 import { change, click, queryAllByRole, render } from "../support/render";

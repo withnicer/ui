@@ -1,5 +1,12 @@
 // @vitest-environment jsdom
-import { afterEach, beforeAll, beforeEach, expect, it, vi } from "vitest";
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  expect,
+  it,
+  vi,
+} from "vite-plus/test";
 
 import { recoverStaleAssets } from "../../src/utils/recover-stale-assets";
 

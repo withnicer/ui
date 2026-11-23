@@ -1,6 +1,8 @@
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 
-import StatusContext, { type StatusProps } from "../contexts/StatusContext";
+import StatusContext from "../contexts/StatusContext";
+import type { StatusProps } from "../contexts/StatusContext";
 import Toast from "./Toast";
 
 interface Props {

@@ -1,9 +1,5 @@
-import {
-  type ButtonHTMLAttributes,
-  type MouseEvent,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
+import type { ButtonHTMLAttributes, MouseEvent } from "react";
 
 interface SwitchProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,

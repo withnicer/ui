@@ -1,11 +1,5 @@
-import {
-  type PointerEvent,
-  type RefObject,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import type { PointerEvent, RefObject } from "react";
 
 /** How long a dropped row takes to settle in its slot. */
 const SETTLE_MS = 200;

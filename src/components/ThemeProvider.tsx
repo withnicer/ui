@@ -1,16 +1,11 @@
-import {
-  type ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { ReactNode } from "react";
 
-import ThemeContext, {
-  type SetTheme,
-  type ThemeContextValue,
-  type ThemeName,
+import ThemeContext from "../contexts/ThemeContext";
+import type {
+  SetTheme,
+  ThemeContextValue,
+  ThemeName,
 } from "../contexts/ThemeContext";
 
 const STORAGE_KEY = "theme";

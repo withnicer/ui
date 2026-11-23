@@ -9,13 +9,17 @@ import {
   it,
   onTestFinished,
   vi,
-} from "vitest";
+} from "vite-plus/test";
 
-import Dropdown, { type DropdownProps } from "../../src/components/Dropdown";
+import Dropdown from "../../src/components/Dropdown";
+import type { DropdownProps } from "../../src/components/Dropdown";
 import { click, getByText } from "../support/render";
 
 const options = ["Afghanistan", "Argentina", "Armenia", "Brazil"].map(
-  (name) => ({ label: `🏳️ ${name}`, value: name })
+  (name) => ({
+    label: `🏳️ ${name}`,
+    value: name,
+  })
 );
 
 const press = (key: string, modifiers: KeyboardEventInit = {}) =>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-import Button, { type ButtonProps } from "./Button";
+import Button from "./Button";
+import type { ButtonProps } from "./Button";
 import Icon from "./Icon";
 
 export interface EmptyStateProps {

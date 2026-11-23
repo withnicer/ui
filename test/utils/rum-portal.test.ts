@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 // @vitest-environment-options {"url":"https://portal.dev.nicer.travel/"}
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, expect, it, vi } from "vite-plus/test";
 
 import { portalRumFetch, sanitizePortalRum } from "../../src/utils/rum-portal";
 

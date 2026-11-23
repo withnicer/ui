@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 
 import TimeInput from "../../src/components/TimeInput";
 import { change, click, getByRole, render } from "../support/render";

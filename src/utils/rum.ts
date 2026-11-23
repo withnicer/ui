@@ -1,4 +1,6 @@
-import { AwsRum, type AwsRumConfig } from "aws-rum-web";
+import { AwsRum } from "aws-rum-web";
+import type { AwsRumConfig } from "aws-rum-web";
+
 import { portalRumFetch } from "./rum-portal";
 
 /**

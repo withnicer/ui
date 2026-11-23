@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 
 import RangeSlider from "../../src/components/RangeSlider";
 import { change, getByRole, render } from "../support/render";

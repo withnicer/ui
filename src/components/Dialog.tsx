@@ -1,4 +1,5 @@
-import Button, { type ButtonProps } from "./Button";
+import Button from "./Button";
+import type { ButtonProps } from "./Button";
 import NavButton from "./NavButton";
 import Overlay from "./Overlay";
 

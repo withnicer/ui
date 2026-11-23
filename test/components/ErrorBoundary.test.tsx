@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 // @vitest-environment-options {"url":"https://portal.dev.nicer.travel/"}
-import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vite-plus/test";
 
 import ErrorBoundary from "../../src/components/ErrorBoundary";
 import { initRum } from "../../src/utils/rum";

@@ -1,8 +1,16 @@
 // @vitest-environment jsdom
 import { act } from "react";
-import { afterEach, beforeEach, expect, it, onTestFinished, vi } from "vitest";
+import {
+  afterEach,
+  beforeEach,
+  expect,
+  it,
+  onTestFinished,
+  vi,
+} from "vite-plus/test";
 
-import Tour, { type TourStep } from "../../src/components/Tour";
+import Tour from "../../src/components/Tour";
+import type { TourStep } from "../../src/components/Tour";
 import { click, getByText, queryAllByText, render } from "../support/render";
 
 // jsdom lays nothing out: an element has a box only when a test gives it one.

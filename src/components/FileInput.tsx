@@ -1,12 +1,10 @@
-import {
-  type ChangeEvent,
-  type DragEvent,
-  type InputHTMLAttributes,
-  type KeyboardEvent,
-  type MouseEvent,
-  useEffect,
-  useRef,
-  useState,
+import { useEffect, useRef, useState } from "react";
+import type {
+  ChangeEvent,
+  DragEvent,
+  InputHTMLAttributes,
+  KeyboardEvent,
+  MouseEvent,
 } from "react";
 
 import Button from "./Button";

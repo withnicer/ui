@@ -1,11 +1,6 @@
 import clsx from "clsx";
-import {
-  type HTMLAttributes,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import type { HTMLAttributes } from "react";
 
 interface Tab {
   /** Shown as a small badge after the label (e.g. a queue size, or "10,000+"). */

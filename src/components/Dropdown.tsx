@@ -1,4 +1,5 @@
-import { Fragment, type MouseEvent, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import type { MouseEvent } from "react";
 import { createPortal } from "react-dom";
 
 import { findTypeAheadMatch, TYPE_AHEAD_RESET_MS } from "../utils/type-ahead";

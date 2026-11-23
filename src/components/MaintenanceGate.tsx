@@ -1,4 +1,5 @@
-import { type ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 
 /** Frequent enough to lift the curtain minutes after ops flips the flag off. */
 const POLL_MS = 60_000;
@@ -37,7 +38,9 @@ export default function MaintenanceGate({ apiUrl, children, getToken }: Props) {
     const check = async () => {
       try {
         const token = await getToken?.();
-        if (getToken && !token) return;
+        if (getToken && !token) {
+          return;
+        }
         const response = await fetch(
           `${apiUrl.replace(/\/+$/, "")}/config/AppVersion/web`,
           token ? { headers: { Authorization: `Bearer ${token}` } } : undefined

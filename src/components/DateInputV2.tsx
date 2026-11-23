@@ -1,9 +1,5 @@
-import {
-  type Dispatch,
-  type InputHTMLAttributes,
-  type SetStateAction,
-  useId,
-} from "react";
+import { useId } from "react";
+import type { Dispatch, InputHTMLAttributes, SetStateAction } from "react";
 
 import { formatDate } from "../utils/dates";
 import Icon from "./Icon";
@@ -27,7 +23,9 @@ export const DateInputV2 = ({
         disabled={rest.disabled}
         readOnly
         onClick={() => {
-          if (!rest.disabled) setCalendarVisible(true);
+          if (!rest.disabled) {
+            setCalendarVisible(true);
+          }
         }}
         onKeyDown={(event) => {
           if (!rest.disabled && (event.key === "Enter" || event.key === " ")) {

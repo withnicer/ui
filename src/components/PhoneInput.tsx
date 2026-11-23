@@ -1,12 +1,5 @@
-import {
-  type ChangeEvent,
-  type FormEvent,
-  type MouseEvent,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import type { ChangeEvent, FormEvent, MouseEvent } from "react";
 
 import dialCodes from "../utils/dial-codes.json";
 import Dropdown from "./Dropdown";

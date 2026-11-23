@@ -1,4 +1,5 @@
-import { type MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { MouseEvent } from "react";
 
 import Button from "./Button";
 import NavButton from "./NavButton";

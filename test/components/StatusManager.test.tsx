@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { useContext } from "react";
-import { expect, it } from "vitest";
+import { expect, it } from "vite-plus/test";
 
 import StatusManager from "../../src/components/StatusManager";
 import StatusContext from "../../src/contexts/StatusContext";

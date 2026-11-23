@@ -4,7 +4,9 @@ export const recoverStaleAssets = (): void => {
     const key = "nicer:asset-reload-at";
     try {
       const previous = Number(sessionStorage.getItem(key) || 0);
-      if (Date.now() - previous < 60_000) return;
+      if (Date.now() - previous < 60_000) {
+        return;
+      }
       sessionStorage.setItem(key, String(Date.now()));
     } catch {
       return; // Do not risk a reload loop if storage is unavailable.

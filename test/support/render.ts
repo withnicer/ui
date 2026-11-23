@@ -1,6 +1,7 @@
-import { act, type ReactElement } from "react";
+import { act } from "react";
+import type { ReactElement } from "react";
 import { createRoot } from "react-dom/client";
-import { onTestFinished } from "vitest";
+import { onTestFinished } from "vite-plus/test";
 
 // Without it React warns that every update in a test is outside act().
 Reflect.set(globalThis, "IS_REACT_ACT_ENVIRONMENT", true);

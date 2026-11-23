@@ -1,20 +1,14 @@
-import {
-  type ComponentType,
-  type MouseEvent,
-  type ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
+import type { ComponentType, MouseEvent, ReactNode } from "react";
 
 import {
-  type Arrangement,
   defaultArrangement,
   isDefaultArrangement,
   loadArrangement,
   saveArrangement,
   withShownOrder,
 } from "../utils/arrangement";
+import type { Arrangement } from "../utils/arrangement";
 import { useFlip } from "../utils/flip";
 import { useDragOrder } from "../utils/use-drag-order";
 import Grip from "./Grip";

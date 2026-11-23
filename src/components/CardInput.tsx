@@ -1,6 +1,8 @@
-import { type ChangeEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import type { ChangeEvent } from "react";
 
-import cards, { type CardBrand } from "../utils/cards";
+import cards from "../utils/cards";
+import type { CardBrand } from "../utils/cards";
 
 interface CardInputValues {
   brand?: CardBrand;
@@ -78,7 +80,7 @@ const CardInput = ({
     let formattedDate = cleaned;
 
     if (cleaned.length >= 3) {
-      formattedDate = cleaned.slice(0, 2) + "/" + cleaned.slice(2);
+      formattedDate = `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`;
     }
 
     setDate(formattedDate);

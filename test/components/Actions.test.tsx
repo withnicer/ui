@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
-import { act, type ComponentProps, useRef, useState } from "react";
-import { afterEach, expect, it, vi } from "vitest";
+import { act, useRef, useState } from "react";
+import type { ComponentProps } from "react";
+import { afterEach, expect, it, vi } from "vite-plus/test";
 
 import Actions from "../../src/components/Actions";
 import {

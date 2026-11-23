@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 
 import ThemeSwitch from "../../src/components/ThemeSwitch";
-import ThemeContext, { type ThemeName } from "../../src/contexts/ThemeContext";
+import ThemeContext from "../../src/contexts/ThemeContext";
+import type { ThemeName } from "../../src/contexts/ThemeContext";
 import { click, getByRole, render } from "../support/render";
 
 it.each([

@@ -1,6 +1,13 @@
 // @vitest-environment jsdom
 // @vitest-environment-options {"url":"https://booking.dev.nicer.travel/"}
-import { afterEach, beforeEach, expect, it, onTestFinished, vi } from "vitest";
+import {
+  afterEach,
+  beforeEach,
+  expect,
+  it,
+  onTestFinished,
+  vi,
+} from "vite-plus/test";
 
 import { isTelemetryNoise } from "../../src/utils/rum";
 

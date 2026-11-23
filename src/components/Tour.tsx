@@ -1,16 +1,10 @@
-import Button from "./Button";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  ACTIONS,
-  EVENTS,
-  type EventData,
-  Joyride,
-  STATUS,
-  type Step,
-  type TooltipRenderProps,
-} from "react-joyride";
+import { ACTIONS, EVENTS, Joyride, STATUS } from "react-joyride";
+import type { EventData, Step, TooltipRenderProps } from "react-joyride";
 import styled, { createGlobalStyle } from "styled-components";
+
+import Button from "./Button";
 
 export type TourStep = Omit<Step, "skipBeacon"> & {
   /**

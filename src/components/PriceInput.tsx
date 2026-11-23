@@ -1,4 +1,5 @@
-import { type ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { ChangeEvent } from "react";
 
 interface PriceProps {
   /** Names the field when no visible label is tied to it. */

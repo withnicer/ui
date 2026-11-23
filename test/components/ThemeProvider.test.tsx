@@ -1,12 +1,19 @@
 // @vitest-environment jsdom
 import { act, useContext, useEffect } from "react";
-import { createRoot, type Root } from "react-dom/client";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createRoot } from "react-dom/client";
+import type { Root } from "react-dom/client";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vite-plus/test";
 
 import ThemeProvider, { savedTheme } from "../../src/components/ThemeProvider";
-import ThemeContext, {
-  type ThemeContextValue,
-} from "../../src/contexts/ThemeContext";
+import ThemeContext from "../../src/contexts/ThemeContext";
+import type { ThemeContextValue } from "../../src/contexts/ThemeContext";
 
 let container: HTMLDivElement;
 let root: Root;

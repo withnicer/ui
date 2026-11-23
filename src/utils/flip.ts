@@ -1,4 +1,5 @@
-import { type RefObject, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
+import type { RefObject } from "react";
 
 /** How long what makes room takes to slide, and an item put in to fade in. */
 const SLIDE_MS = 300;

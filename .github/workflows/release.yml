@@ -1,0 +1,43 @@
+# Every pull request and every push to main is formatted, linted, type checked
+# and built. On main, semantic-release then reads the Conventional Commits
+# since the last tag, picks the next version, publishes to npm and writes the
+# GitHub release. Commits that call for no release (docs, chore, ci) publish
+# nothing.
+name: Release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # tags and GitHub releases
+      issues: write # release comments on issues
+      pull-requests: write # release comments on pull requests
+      id-token: write # npm provenance and, later, trusted publishing
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: voidzero-dev/setup-vp@v1.22.0
+        with:
+          node-version: "24"
+          cache: true
+      - run: vp check
+      - run: vp run build
+      - name: Release
+        if: github.event_name == 'push'
+        run: vp run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

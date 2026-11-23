@@ -1,10 +1,8 @@
 // @vitest-environment jsdom
-import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vite-plus/test";
 
-import {
-  CalendarV2,
-  type CalendarPropsV2,
-} from "../../src/components/CalendarV2";
+import { CalendarV2 } from "../../src/components/CalendarV2";
+import type { CalendarPropsV2 } from "../../src/components/CalendarV2";
 import {
   click,
   getByRole,

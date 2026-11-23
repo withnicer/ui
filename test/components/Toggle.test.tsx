@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vite-plus/test";
 
 import Toggle from "../../src/components/Toggle";
 import { click, getByRole, queryAllByRole, render } from "../support/render";

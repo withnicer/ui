@@ -1,8 +1,10 @@
-import { type FormEvent, type ReactNode, useEffect } from "react";
+import { useEffect } from "react";
+import type { FormEvent, ReactNode } from "react";
 
 import AgencyMark from "./AgencyMark";
 import Button from "./Button";
-import PhoneInput, { type Phone } from "./PhoneInput";
+import PhoneInput from "./PhoneInput";
+import type { Phone } from "./PhoneInput";
 import TextInput from "./TextInput";
 
 export type SignInMethod = "email" | "phone";

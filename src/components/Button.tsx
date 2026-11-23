@@ -1,4 +1,5 @@
-import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from "react";
+import { forwardRef } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 import Icon from "./Icon";
 import Spinner from "./Spinner";
