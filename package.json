@@ -1,0 +1,66 @@
+{
+  "name": "@withnicer/ui",
+  "version": "0.1.0",
+  "description": "Nicer's design system: React primitives, tokens and styles.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withnicer/ui.git"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./dial-codes.json": "./src/utils/dial-codes.json",
+    "./fonts/*": "./src/styles/fonts/*"
+  },
+  "files": [
+    "dist",
+    "src/utils/dial-codes.json",
+    "src/styles/fonts"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.app.json --noEmit false --emitDeclarationOnly --outDir dist",
+    "check-types": "tsc -b && tsc -p tsconfig.test.json",
+    "dev": "vite",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "styled-components": "^6.5.3"
+  },
+  "dependencies": {
+    "aws-rum-web": "^3.2.1",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.23",
+    "react-error-boundary": "^6.1.3",
+    "react-joyride": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "jsdom": "^30.0.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sass": "^1.102.0",
+    "styled-components": "^6.5.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.10"
+  },
+  "packageManager": "bun@1.3.14"
+}

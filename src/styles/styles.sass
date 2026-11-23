@@ -1,0 +1,2715 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap')
+@import './reset.css'
+@import './icons/style.css'
+
+/* FONTS */
+@font-face
+  font-family: 'The Seasons'
+  src: url('./fonts/TheSeasons-Regular.woff2') format('woff2'), url('./fonts/TheSeasons-Regular.woff') format('woff'), url('./fonts/TheSeasons-Regular.ttf') format('truetype')
+  font-weight: normal
+  font-style: normal
+/* eND: FONTS */
+
+/* COLORS */
+:root
+  // Grayscale
+  --gray50: #F2F2F2
+  --gray100: #E6E6E6
+  --gray150: #D9D9D9
+  --gray200: #CCCCCC
+  --gray300: #B3B3B3
+  --gray400: #999999
+  --gray500: #808080
+  --gray600: #666666
+  --gray700: #4D4D4D
+  --gray800: #333333
+  --gray850: #262626
+  --gray875: #202020
+  --gray900: #1A1A1A
+
+  // Status
+  --positive100: #D9F2D9
+  --positive300: #8CD98C
+  --positive500: #40BF40
+  --positive700: #267326
+
+  --warning100: #FFF2CC
+  --warning300: #FFD966
+  --warning500: #FFBF00
+  --warning700: #997300
+
+  --negative100: #FFCCCC
+  --negative300: #FF6666
+  --negative500: #FF0000
+  --negative700: #990000
+
+  // Brand
+  --brandBg: #333333
+  --brandHighlight: white
+  --brandShadow: rgba(51, 51, 51, .5)
+
+  // Brand gold — the warm half of the identity.
+  // The mid steps share hex values with --warning*, but they are NOT alerts:
+  // this ramp is what makes the product feel like Nicer rather than a neutral
+  // shell (advisor banner, progress CTAs, accents). The two darkest steps exist
+  // only here — nothing else in the system goes that deep.
+  --gold50: #FFF9E5
+  --gold100: #FFF2CC
+  --gold200: #FFE599
+  --gold300: #FFD966
+  --gold400: #FFCC33
+  --gold500: #FFBF00
+  --gold600: #CC9900
+  --gold700: #997300
+  --gold800: #664D00
+  --gold900: #332600
+  // The accent ramp agency-facing screens use: Nicer's gold until an agency's
+  // theme sets its own (site-theme brandRamp).
+  --brand50: var(--gold50)
+  --brand100: var(--gold100)
+  --brand200: var(--gold200)
+  --brand300: var(--gold300)
+  --brand400: var(--gold400)
+  --brand500: var(--gold500)
+  --brand600: var(--gold600)
+  --brand700: var(--gold700)
+  --brand800: var(--gold800)
+  --brand900: var(--gold900)
+
+// THEMES
+// Light
+:root
+  --bgPrimary: white
+  --bgSoft: var(--gray50)
+  --bgMedium: var(--gray100)
+  --bgHard: var(--gray150)
+  --borderSoft: var(--gray100)
+  --borderMedium: var(--gray150)
+  --borderHard: var(--gray200)
+  --borderHighlight: var(--gray400)
+  --textSoft: var(--gray500)
+  --textNormal: var(--gray700)
+  --highlight: black
+  --bgPositive: var(--positive100)
+  --textPositive: var(--positive700)
+  --bgWarning: var(--warning100)
+  --textWarning: var(--warning700)
+  --bgNegative: var(--negative100)
+  --bgNegativeHover: #FFB2B2
+  --textNegative: var(--negative700)
+
+  // Chart series (categorical, fixed slot order: colour follows the entity).
+  // Gold leads as the brand hue; the order passes colour-vision separation
+  // (OKLab ΔE ≥ 8 on adjacent pairs) on white. Never cycle past slot 6.
+  --chart1: #EDA100
+  --chart2: #2A78D6
+  --chart3: #1BAF7A
+  --chart4: #4A3AA7
+  --chart5: #E87BA4
+  --chart6: #008300
+
+// Dark
+.dark
+  --bgPrimary: var(--gray900)
+  --bgSoft: var(--gray875)
+  --bgMedium: var(--gray850)
+  --bgHard: var(--gray800)
+  --borderSoft: var(--gray850)
+  --borderMedium: var(--gray800)
+  --borderHard: var(--gray700)
+  --borderHighlight: var(--gray600)
+  --textSoft: var(--gray500)
+  --textNormal: var(--gray300)
+  --highlight: white
+  --bgPositive: rgba(64, 191, 64, .15)
+  --textPositive: var(--positive300)
+  --bgWarning: rgba(255, 191, 0, .15)
+  --textWarning: var(--warning300)
+  --bgNegative: rgba(255, 0, 0, .15)
+  --bgNegativeHover: rgba(255, 0, 0, .25)
+  --textNegative: var(--negative300)
+
+  // Same six hues re-stepped for the dark surface (not a brightness flip).
+  --chart1: #C98500
+  --chart2: #3987E5
+  --chart3: #199E70
+  --chart4: #9085E9
+  --chart5: #D55181
+  --chart6: #008300
+
+// SEGMENTS
+:root
+  --activityDark: #301040
+  --activityLight: #D6B8E5
+  --car_rentalDark: #404010
+  --car_rentalLight: #E5E5B8
+  --cruiseDark: #104040
+  --cruiseLight: #B8E5E5
+  --flightDark: #104028
+  --flightLight: #B8E5CF
+  --lodgingDark: #401010
+  --lodgingLight: #FFCCCC
+  --restaurantDark: #402810
+  --restaurantLight: #FFCC99
+  --transportationDark: #404040
+  --transportationLight: #E6E6E6
+  --insuranceDark: #102840
+  --insuranceLight: #99CCFF
+  --customDark: var(--highlight)
+  --customLight: var(--bgSoft)
+
+.dark
+  --activityDark: #D6B8E5
+  --activityLight: rgba(214, 184, 229, .15)
+  --car_rentalDark: #E5E5B8
+  --car_rentalLight: rgba(229, 229, 184, .15)
+  --cruiseDark: #B8E5E5
+  --cruiseLight: rgba(184, 229, 229, .15)
+  --flightDark: #B8E5CF
+  --flightLight: rgba(184, 229, 207, .15)
+  --lodgingDark: #FFCCCC
+  --lodgingLight: rgba(255, 204, 204, .15)
+  --restaurantDark: #FFCC99
+  --restaurantLight: rgba(255, 204, 153, .15)
+  --transportationDark: #E6E6E6
+  --transportationLight: rgba(230, 230, 230, .15)
+  --insuranceDark: #99CCFF
+  --insuranceLight: rgba(153, 204, 255, .15)
+  --customDark: var(--highlight)
+  --customLight: var(--bgSoft)
+/* End: COLORS */
+
+/* EASINGS */
+:root
+  --easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1)
+  --easeOutBack: cubic-bezier(0.34, 1.56, 0.64, 1)
+/* End: EASINGS */
+
+/* RADIUS */
+// A booking site's theme overrides these (siteThemeVars in @nicer/catalog).
+// Not `--radius-*`: discover's Tailwind CSS defines those globally.
+:root
+  --nicerRadiusS: 6px
+  --nicerRadiusM: 12px
+  --nicerRadiusL: 16px
+/* End: RADIUS */
+
+/* TEXT STYLES */
+.t-xxxl
+  font-size: 56px
+  line-height: 96px
+
+.t-xxl
+  font-size: 48px
+  line-height: 80px
+
+.t-xl
+  font-size: 32px
+  line-height: 56px
+
+.t-l
+  font-size: 28px
+  line-height: 48px
+
+.t-m
+  font-size: 24px
+  line-height: 40px
+
+.t-s
+  font-size: 16px
+  line-height: 28px
+
+.t-xs
+  font-size: 14px
+  line-height: 24px
+
+.t-xxs
+  font-size: 12px
+  line-height: 20px
+
+.t-xxxs
+  font-size: 10px
+  line-height: 16px
+
+b,
+.bold
+  font-weight: 700
+
+.brand
+  font-family: var(--fontBrand, 'The Seasons')
+/* End: TEXT STYLES */
+
+/* GLOBALS */
+// The browser's own parts (scrollbars, native pickers) follow the theme:
+// without it, every scrollbar stays light on a dark page.
+body
+  color-scheme: light
+
+body.dark
+  color-scheme: dark
+
+body
+  background: var(--bgPrimary)
+  font-family: var(--fontBody, 'Inter'), sans-serif
+  font-weight: 400
+  color: var(--highlight)
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+// IMAGE PLACEHOLDERS
+// A photo that failed (installImageFallbacks), an <img> without a src, or a
+// frame with no photo to show (.ui-image-placeholder): a picture glyph a tone
+// off a fill one step harder than the surfaces around it, so the slot reads as
+// a slot — never a broken icon, its alt text or a block of the proxy's 1×1
+// pixel. No brand mark: every agency's travelers see it. A person gets a
+// silhouette, a hotel the blurred room its cards already fall back to.
+img[data-image-fallback],
+img:not([src]),
+.ui-image-placeholder
+  background-color: var(--bgMedium)
+  background-image: url('../assets/image-placeholder-light.svg')
+  background-position: center
+  background-repeat: no-repeat
+  background-size: auto min(40%, 48px)
+  color: transparent
+
+// The frame's stand-in for its photo: sized by the host like the <img> it
+// replaces.
+.ui-image-placeholder
+  display: block
+
+img[data-image-fallback='avatar']
+  background-color: var(--bgSoft)
+  background-image: url('../assets/avatar-placeholder-light.svg')
+  background-position: center bottom
+  background-size: 100%
+
+img[data-image-fallback='lodging'],
+.ui-image-placeholder[data-image-kind='lodging']
+  background-image: url('../assets/lodging-placeholder.jpg')
+  background-size: cover
+
+.dark
+  img[data-image-fallback],
+  img:not([src]),
+  .ui-image-placeholder
+    background-image: url('../assets/image-placeholder-dark.svg')
+
+  img[data-image-fallback='avatar']
+    background-image: url('../assets/avatar-placeholder-dark.svg')
+
+  img[data-image-fallback='lodging'],
+  .ui-image-placeholder[data-image-kind='lodging']
+    background-image: url('../assets/lodging-placeholder.jpg')
+
+// A photo that waits for its pixels: hidden until installImageFallbacks marks
+// it loaded or swaps in its placeholder, so neither the proxy's 1×1 pixel nor
+// a half-painted photo flashes before it — the frame shows its own ground.
+img.ui-image-reveal
+  transition: opacity 240ms var(--easeOutExpo)
+
+  &[src]:not([data-image-loaded]):not([data-image-fallback])
+    opacity: 0
+// End: IMAGE PLACEHOLDERS
+
+// Scrollbar
+.no-scrollbar
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+  &::-webkit-scrollbar
+    display: none
+/* End: GLOBALS */
+
+/* ICONS THE FONT LACKS */
+// Drawn as a mask in the text's colour at the font's size, so <Icon> and
+// IconButton take them by name like the font's own, at the same 1px line.
+// A gear: Settings, wherever a page or a panel is set up (the sliders,
+// `settings`, arrange a list's columns or pages).
+.ui-icon.icon-gear::before
+  content: ""
+  display: inline-block
+  width: 1em
+  height: 1em
+  vertical-align: top
+  background-color: currentColor
+  $gear: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1' stroke-linejoin='round'><path d='M10.05 4.45L10.32 1.94A10.2 10.2 0 0 1 13.68 1.94L13.95 4.45A7.8 7.8 0 0 1 15.96 5.28L17.92 3.7A10.2 10.2 0 0 1 20.3 6.08L18.72 8.04A7.8 7.8 0 0 1 19.55 10.05L22.06 10.32A10.2 10.2 0 0 1 22.06 13.68L19.55 13.95A7.8 7.8 0 0 1 18.72 15.96L20.3 17.92A10.2 10.2 0 0 1 17.92 20.3L15.96 18.72A7.8 7.8 0 0 1 13.95 19.55L13.68 22.06A10.2 10.2 0 0 1 10.32 22.06L10.05 19.55A7.8 7.8 0 0 1 8.04 18.72L6.08 20.3A10.2 10.2 0 0 1 3.7 17.92L5.28 15.96A7.8 7.8 0 0 1 4.45 13.95L1.94 13.68A10.2 10.2 0 0 1 1.94 10.32L4.45 10.05A7.8 7.8 0 0 1 5.28 8.04L3.7 6.08A10.2 10.2 0 0 1 6.08 3.7L8.04 5.28A7.8 7.8 0 0 1 10.05 4.45Z'/><circle cx='12' cy='12' r='3'/></svg>"
+  -webkit-mask: url("#{$gear}") center / contain no-repeat
+  mask: url("#{$gear}") center / contain no-repeat
+/* End: ICONS THE FONT LACKS */
+
+/* ACTIONS */
+.ui-actions
+  @extend .no-scrollbar
+  list-style: none
+  min-width: 200px
+  border-radius: 16px
+  overflow-y: scroll
+  border: 1px solid var(--borderHard)
+  padding: 7px
+  background: var(--bgPrimary)
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .1)
+  color: var(--highlight)
+  position: absolute
+  z-index: 1000
+
+  li
+    height: 40px
+    border-radius: 8px
+    padding: 8px 20px 8px 8px
+    display: flex
+    align-items: center
+    gap: 12px
+    cursor: pointer
+    transition: background 150ms
+
+    > .ui-icon
+      margin: 3px
+
+    p
+      @extend .t-xs
+      white-space: nowrap
+
+    &:hover
+      background: var(--bgSoft)
+
+    &.destructive
+      color: var(--textNegative)
+
+      > .ui-icon
+        color: var(--textNegative)
+
+    &.disabled
+      color: var(--textSoft)
+      cursor: default
+
+      > .ui-icon
+        color: var(--textSoft)
+
+      &:hover
+        background: none
+/* End: ACTIONS */
+
+/* BUTTON */
+.ui-button
+  white-space: nowrap
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 8px
+  cursor: pointer
+  transition-property: background, box-shadow
+  transition-duration: 300ms
+
+  // Size
+  &.l
+    @extend .t-s
+    height: 56px
+    padding: 0 28px
+    border-radius: var(--nicerRadiusM, 12px)
+
+  &.m
+    @extend .t-xs
+    height: 40px
+    padding: 0 20px
+    // 8px: two thirds of M, so it follows a site's radius too.
+    border-radius: calc(var(--nicerRadiusM, 12px) * 2 / 3)
+
+  &.s
+    @extend .t-xxs
+    height: 28px
+    padding: 0 14px
+    border-radius: var(--nicerRadiusS, 6px)
+
+  // Hierarchy
+  // Hover styles only where hover exists: on touch, the browser keeps
+  // :hover applied after a tap, so the shadow (and hover fill) stuck to
+  // the tapped button until something else was touched.
+  &.primary
+    background: var(--brandBg)
+    color: var(--brandHighlight)
+
+    @media (hover: hover)
+      &.l:hover
+        box-shadow: 0 28px 28px -14px var(--brandShadow)
+
+      &.m:hover
+        box-shadow: 0 20px 20px -10px var(--brandShadow)
+
+      &.s:hover
+        box-shadow: 0 14px 14px -7px var(--brandShadow)
+
+  &.secondary,
+  &.tertiary
+    box-shadow: inset 0 0 0 1px var(--borderHard)
+    color: var(--highlight)
+
+    @media (hover: hover)
+      &:hover
+        background: var(--bgSoft)
+
+  &.destructive
+    background: var(--bgNegative)
+    color: var(--textNegative)
+
+    @media (hover: hover)
+      &:hover
+        background: var(--bgNegativeHover)
+
+  // State
+  &.loading,
+  &.success,
+  &.error,
+  &.disabled
+    box-shadow: none
+    pointer-events: none
+
+  // Busy, done or failed: the label keeps its room unseen, so the button
+  // keeps its width, and the state sits on it, in the middle.
+  &.loading,
+  &.success,
+  &.error
+    display: grid
+    place-items: center
+
+    > .held,
+    > .status
+      grid-area: 1 / 1
+      display: flex
+      align-items: center
+      gap: 8px
+
+    > .held
+      visibility: hidden
+
+  &.disabled
+    background: var(--bgHard)
+    color: var(--textSoft)
+
+  &.loading
+    &.secondary,
+    &.tertiary
+      background: var(--bgSoft)
+      color: var(--highlight)
+
+    &.m .ui-spinner
+      width: 18px
+      height: 18px
+
+    &.s .ui-spinner
+      width: 12px
+      height: 12px
+
+  &.success
+    background: var(--bgPositive)
+    color: var(--textPositive)
+
+  &.error
+    background: var(--bgNegative)
+    color: var(--textNegative)
+/* End: BUTTON */
+
+/* MAINTENANCE GATE */
+.ui-maintenance
+  min-height: 100dvh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  gap: 12px
+  padding: 24px
+  text-align: center
+  background: var(--bgPrimary)
+
+  .wordmark
+    font-size: 44px
+    margin: 0 0 12px
+    color: var(--highlight)
+
+  h1
+    margin: 0
+    font-weight: 600
+
+  > p:last-child
+    margin: 0
+    max-width: 380px
+    color: var(--textSoft)
+/* End: MAINTENANCE GATE */
+
+
+
+/* ICON BUTTON */
+.ui-icon-button
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  transition-property: background, box-shadow
+  transition-duration: 300ms
+
+  // Size
+  &.l
+    width: 56px
+    height: 56px
+    border-radius: 12px
+
+  &.m
+    width: 40px
+    height: 40px
+    border-radius: 8px
+
+  &.s
+    width: 28px
+    height: 28px
+    border-radius: 4px
+
+  &.circle
+    border-radius: 50% !important
+
+  // Hierarchy
+  // Hover styles only where hover exists: on touch, the browser keeps
+  // :hover applied after a tap, so the shadow (and hover fill) stuck to
+  // the tapped button until something else was touched.
+  &.primary
+    background: var(--brandBg)
+    color: var(--brandHighlight)
+
+    @media (hover: hover)
+      &.l:hover
+        box-shadow: 0 28px 28px -14px var(--brandShadow)
+
+      &.m:hover
+        box-shadow: 0 20px 20px -10px var(--brandShadow)
+
+      &.s:hover
+        box-shadow: 0 14px 14px -7px var(--brandShadow)
+
+  &.secondary,
+  &.tertiary
+    box-shadow: inset 0 0 0 1px var(--borderHard)
+    color: var(--highlight)
+
+    @media (hover: hover)
+      &:hover
+        background: var(--bgSoft)
+
+  &.destructive
+    background: var(--bgNegative)
+    color: var(--textNegative)
+
+    @media (hover: hover)
+      &:hover
+        background: var(--bgNegativeHover)
+
+  // State
+  &.disabled
+    box-shadow: none
+    pointer-events: none
+    background: var(--bgHard)
+    color: var(--textSoft)
+/* End: ICON BUTTON */
+
+/* CALENDAR */
+.ui-calendar
+  width: 332px
+  border-radius: 20px
+  border: 1px solid var(--borderHard)
+  padding: 11px
+  background: var(--bgPrimary)
+  display: flex
+  flex-direction: column
+  gap: 24px
+
+  > :first-child
+    display: flex
+    align-items: center
+
+    .ui-nav-button
+      margin: 2px
+
+    p
+      @extend .t-s
+      flex: 1
+      line-height: 40px
+      border-radius: 8px
+      text-align: center
+      margin: 2px
+      cursor: pointer
+      transition: background 300ms
+
+      &:hover
+        background: var(--bgSoft)
+
+  .days
+    display: flex
+    flex-direction: column
+    gap: 16px
+
+    > :first-child
+      display: grid
+      grid-template-columns: repeat(7, 1fr)
+
+      p
+        @extend .t-xxxs
+        color: var(--textSoft)
+        text-align: center
+
+    > :last-child
+      display: grid
+      grid-template-columns: repeat(7, 1fr)
+      gap: 4px
+
+      button
+        @extend .t-xxs
+        width: 40px
+        height: 40px
+        border-radius: 20px
+        display: flex
+        align-items: center
+        justify-content: center
+        position: relative
+        margin: 0 auto
+        cursor: pointer
+
+        &:hover
+          background: var(--bgSoft)
+
+        &.today
+          &::after
+            content: ''
+            width: 4px
+            height: 4px
+            border-radius: 2px
+            background: var(--brandBg)
+            position: absolute
+            bottom: 4px
+            left: 18px
+
+          &.selected::after
+            background: white
+
+        &.selected
+          background: var(--brandBg)
+          color: var(--brandHighlight) !important
+
+        &.between
+          border: 1px solid var(--borderHard)
+
+        &:disabled
+          color: var(--textSoft)
+          pointer-events: none
+
+        &:empty
+          visibility: hidden
+
+  .months,
+  .years
+    display: flex
+    flex-wrap: wrap
+
+    p
+      flex-basis: calc(100% / 3)
+      border-radius: 8px
+      line-height: 40px
+      text-align: center
+      cursor: pointer
+      transition: background 300ms
+
+      &:hover
+        background: var(--bgSoft)
+
+      &.active
+        background: var(--brandBg)
+        color: var(--brandHighlight)
+
+  > .ui-button
+    width: 100%
+/* End: CALENDAR */
+
+/* CHECK & RADIO BUTTON */
+.ui-check,
+.ui-radio-button
+  width: 24px
+  height: 24px
+  padding: 2px
+  position: relative
+
+  input
+    width: 20px
+    height: 20px
+    border-radius: 50%
+    border: 1px solid var(--borderHard)
+    background: var(--bgSoft)
+    cursor: pointer
+
+    &:hover,
+    &:focus
+      & + figure,
+      & + .ui-icon
+        opacity: .2
+
+    &:focus
+      border: 0
+      box-shadow: 0 0 0 2px var(--borderHighlight)
+
+    // A required choice left empty, until it is made: only the ring turns
+    // red, so it still reads as empty.
+    &[aria-invalid="true"]:not(:checked)
+      border: 1px solid var(--textNegative)
+
+    &:checked
+      border: 0
+      background: var(--brandBg)
+
+      & + figure,
+      & + .ui-icon
+        opacity: 1
+
+      & + figure
+        background: var(--brandHighlight)
+
+      & + .ui-icon
+        color: var(--brandHighlight)
+
+    &:disabled
+      border: 0
+      background: var(--bgMedium)
+      pointer-events: none
+
+      &:checked
+        background: var(--bgHard)
+
+        & + figure,
+        & + .ui-icon
+          opacity: 1
+
+        & + figure
+          background: var(--textSoft)
+
+        & + .ui-icon
+          color: var(--textSoft)
+
+  figure,
+  .ui-icon
+    opacity: 0
+    position: absolute
+    top: calc(50% - 4px)
+    left: calc(50% - 4px)
+    pointer-events: none
+
+  figure
+    width: 8px
+    height: 8px
+    background: var(--highlight)
+    border-radius: 50%
+
+  .ui-icon
+    color: var(--highlight)
+
+.ui-radio-button,
+.ui-check.circle
+  input
+    border-radius: 50%
+
+.ui-check:not(.circle)
+  input
+    border-radius: 5px
+/* End: CHECK & RADIO BUTTON */
+
+/* DIALOG */
+.ui-dialog
+  width: 400px
+  max-width: calc(100vw - 40px)
+  // Header and actions stay put; a long body scrolls between them. Capped
+  // like a dialog, not the viewport: on a tall screen a long list stretched
+  // the box nearly floor to ceiling.
+  max-height: min(560px, calc(100dvh - 96px))
+  margin: 0 20px
+  border-radius: 20px
+  border: 1px solid var(--borderMedium)
+  background: var(--bgPrimary)
+  display: flex
+  flex-direction: column
+
+  header
+    padding: 10px
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    gap: 16px
+
+    h6
+      flex: 1
+      min-width: 0
+      padding-left: 10px
+      overflow-wrap: anywhere
+
+    .ui-nav-button
+      flex-shrink: 0
+
+  > p
+    @extend .t-xs
+    padding: 32px 20px
+
+  .content
+    @extend .no-scrollbar
+    flex-grow: 1
+    min-height: 0
+    overflow-y: auto
+    padding: 0px 20px 32px
+
+  // A title sits right above the body: the gap that held the lone close
+  // button would float the content away from its heading.
+  header:has(h6) + .content
+    padding-top: 8px
+
+  footer
+    padding: 0 12px 12px
+    display: flex
+    gap: 8px
+
+    .ui-button
+      flex: 1
+/* End: DIALOG */
+
+/* DROPDOWN */
+.ui-dropdown
+  @extend .no-scrollbar
+  list-style: none
+  min-width: 100%
+  width: 100%
+  max-height: 256px
+  border-radius: 8px
+  overflow-y: scroll
+  border: 1px solid var(--borderHard)
+  padding: 7px
+  background: var(--bgPrimary)
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .1)
+  position: absolute
+  z-index: 999
+  top: 100%
+  left: 0
+
+  li
+    @extend .t-xs
+    border-bottom: 1px solid var(--borderSoft)
+    padding: 12px 8px 11px
+    display: flex
+    align-items: center
+    gap: 12px
+    cursor: pointer
+    transition: background 150ms
+
+    // Phone-sized: desktop's row height turns five results into most of the
+    // screen.
+    @media (max-width: 600px)
+      padding: 9px 8px 8px
+
+    p
+      flex: 1
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    img
+      width: auto
+      max-height: 24px
+
+    // A label with a second line under it: the row keeps its height.
+    &:has(.option-text)
+      padding: 6px 8px 5px
+
+    .option-text
+      flex: 1
+      min-width: 0
+      display: flex
+      flex-direction: column
+
+      p
+        flex: none
+
+      .description
+        color: var(--textSoft)
+
+    // The row the keyboard is on reads like the hovered one.
+    &:hover,
+    &.active
+      background: var(--bgSoft)
+
+    // Section headings group the rows under them; they are read, not picked.
+    &.section
+      @extend .t-xxs
+      padding: 12px 8px 6px
+      border-bottom: none
+      color: var(--textSoft)
+      font-weight: 600
+      cursor: default
+
+      &:hover
+        background: none
+
+  // Grouped lists (recent searches, then popular places) get the room to
+  // show more than one group before scrolling.
+  &.sectioned
+    max-height: min(330px, 60vh)
+
+  // A list with its own search: the field stays on top while the rows
+  // scroll under it.
+  &.searchable
+    max-height: min(400px, 60vh)
+    padding-top: 0
+
+  li.search
+    @extend .t-xs
+    margin: 0 -7px
+    border-bottom: 1px solid var(--borderSoft)
+    padding: 12px 15px
+    background: var(--bgPrimary)
+    position: sticky
+    top: 0
+    z-index: 1
+    cursor: text
+
+    &:hover
+      background: var(--bgPrimary)
+
+    .ui-icon
+      flex-shrink: 0
+      color: var(--textSoft)
+
+    input
+      flex: 1
+      min-width: 0
+      border: none
+      padding: 0
+      background: transparent
+      color: var(--highlight)
+      font-family: inherit
+      outline: none
+
+      &::placeholder
+        color: var(--textSoft)
+
+  li.empty
+    @extend .t-xxs
+    border-bottom: none
+    color: var(--textSoft)
+    cursor: default
+
+    &:hover
+      background: none
+/* End: DROPDOWN */
+
+/* FILE UPLOAD */
+.ui-file-input
+  // One height for every state: the box never pulls what is under it.
+  min-height: 180px
+  padding: 20px 16px
+  border-radius: 12px
+  border: 2px dashed var(--borderHard)
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  transition-property: border-color, background
+  transition-duration: 300ms
+
+  &:hover
+    border-color: var(--borderHighlight)
+
+  // Something held over it: the box answers, the arrow lifts.
+  &.dragging
+    border-style: solid
+    border-color: var(--borderHighlight)
+    background: var(--bgSoft)
+
+    .badge
+      background: var(--bgPrimary)
+      transform: scale(1.15)
+
+      .ui-icon
+        animation: ui-file-input-lift 700ms var(--easeOutExpo) infinite alternate
+
+  &.link
+    cursor: default
+
+  .stage
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 12px
+    text-align: center
+    animation: ui-file-input-in 240ms var(--easeOutExpo)
+
+  .badge
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    background: var(--bgSoft)
+    color: var(--highlight)
+    display: grid
+    place-items: center
+    transition: transform 300ms var(--easeOutBack), background 300ms
+
+  .words
+    display: flex
+    flex-direction: column
+    min-width: 0
+    max-width: 100%
+
+  .lead
+    @extend .t-xs
+    color: var(--highlight)
+    font-weight: 500
+    overflow-wrap: anywhere
+
+  .hint
+    @extend .t-xxs
+    color: var(--textSoft)
+
+  .actions
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    gap: 8px
+
+  // The field and its buttons share one height.
+  .link-row
+    width: 100%
+    display: flex
+    align-items: center
+    gap: 8px
+
+    .ui-text-input
+      flex: 1
+      min-width: 0
+
+  // Browse opens it; it never shows.
+  input[type="file"]
+    display: none
+
+  @media (prefers-reduced-motion: reduce)
+    .stage,
+    &.dragging .badge .ui-icon
+      animation: none
+
+@keyframes ui-file-input-in
+  from
+    opacity: 0
+    transform: translateY(4px)
+
+@keyframes ui-file-input-lift
+  to
+    transform: translateY(-3px)
+/* End: FILE UPLOAD */
+
+/* SIGN IN — the portal's and Octopus's: the card inside the brand photo on a
+   desktop, the native app's plain screen on a phone (the wordmark in the
+   upper half, the field at mid screen, the terms and a full-width pill at
+   the bottom). */
+.ui-sign-in
+  width: 100%
+  height: 100%
+  background: var(--bgPrimary)
+  display: flex
+  align-items: center
+  justify-content: center
+
+  // The desktop frame: the brand photo around the card.
+  > .frame
+    width: 800px
+    height: 600px
+    border-radius: 24px
+    padding: 8px
+    background: url('/images/login/bg.png') center
+    background-size: cover
+
+  .card
+    position: relative
+    width: 50%
+    height: 100%
+    border-radius: 16px
+    padding: 40px
+    background: var(--bgPrimary)
+    display: flex
+    flex-direction: column
+
+    .corner
+      position: absolute
+      top: 40px
+      right: 40px
+
+      a
+        text-decoration: underline
+        text-underline-offset: 3px
+
+    .logo
+      align-self: flex-start
+      margin-bottom: 64px
+
+    // An agency's mark on the 66px tile Nicer's own logo is drawn on.
+    .logo.agency
+      width: 66px
+      height: 66px
+      border: 1px solid var(--borderSoft)
+      border-radius: 16px
+      overflow: hidden
+
+    h1
+      margin-bottom: 40px
+      font-weight: normal
+
+    .wordmark
+      display: none
+
+    .links
+      display: flex
+      flex-wrap: wrap
+      gap: 12px
+      margin-top: 12px
+
+      button
+        color: inherit
+        text-decoration: underline
+        text-underline-offset: 3px
+        cursor: pointer
+
+    .terms
+      margin: auto 0 24px
+      color: var(--textSoft)
+
+      a
+        text-decoration: underline
+        text-underline-offset: 3px
+
+    .ui-button
+      width: 100%
+
+  @media (max-width: 768px)
+    > .frame
+      width: 100%
+      height: 100%
+      border-radius: 0
+      padding: 0
+      background: none
+
+    .card
+      width: 100%
+      border-radius: 0
+      padding: 0 16px calc(16px + env(safe-area-inset-bottom, 0px))
+
+      .corner
+        top: calc(16px + env(safe-area-inset-top, 0px))
+        right: 16px
+
+      .logo,
+      h1
+        display: none
+
+      // The upper half, the wordmark centred in it; the terms below grow to
+      // match, so the field lands at mid screen.
+      .wordmark
+        display: flex
+        flex: 1
+        align-items: center
+        justify-content: center
+
+        img
+          width: 171px
+          height: 40px
+
+      // The native field: 48px, radius 8, a hairline border.
+      .contact
+        input,
+        select
+          height: 48px
+          border-radius: 8px
+          box-shadow: inset 0 0 0 1px var(--borderSoft)
+
+          &:focus
+            box-shadow: inset 0 0 0 1px var(--borderHighlight)
+
+        // The dial code sits for a 40px field; recentre it in this one.
+        .ui-phone-input button
+          top: 50%
+          left: 10px
+          transform: translateY(-50%)
+          color: var(--textNormal)
+
+      .terms
+        flex: 1
+        display: flex
+        align-items: flex-end
+        justify-content: center
+        margin: 0 0 16px
+        text-align: center
+
+      // The native pill: pale gold to continue, the brand's dark to sign in.
+      .ui-button
+        height: 56px
+        border-radius: 12px
+        background: var(--gold200)
+        color: var(--brandBg)
+
+      &.code-step .ui-button
+        background: var(--brandBg)
+        color: var(--brandHighlight)
+
+// The wordmark is drawn in dark ink; the dark theme turns it light.
+.dark .ui-sign-in .wordmark img
+  filter: invert(1)
+/* End: SIGN IN */
+
+/* AGENCY MARK — an agency's logo over a neutral tile with its initial; the
+   logo shows once it has loaded, so a broken one leaves the initial. */
+.ui-agency-mark
+  position: relative
+  flex-shrink: 0
+  width: 32px
+  height: 32px
+  border-radius: 8px
+  overflow: hidden
+  background: var(--bgSoft)
+  color: var(--textSoft)
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .initial
+    font-weight: 600
+
+  img
+    position: absolute
+    inset: 0
+    width: 100%
+    height: 100%
+    object-fit: contain
+    background: var(--bgPrimary)
+    opacity: 0
+    transition: opacity 300ms var(--easeOutExpo)
+
+    &.loaded
+      opacity: 1
+
+  &.s
+    width: 24px
+    height: 24px
+    border-radius: 6px
+
+  // The whole of a tile the host frames (and rounds).
+  &.fill
+    width: 100%
+    height: 100%
+    border-radius: 0
+/* End: AGENCY MARK */
+
+/* SIDE NAV — the apps' left rail (SideNav): 72px, open over the page on
+   hover with the pages' names, and Edit menu's rows while editing. */
+.ui-side-nav-overlay
+  width: 100vw
+  height: 100vh
+  // The modal veil's grey in every brand: --bgHard takes the agency's tint,
+  // which turned this veil the brand's colour.
+  background: var(--gray150)
+  opacity: 0
+  position: fixed
+  z-index: 998
+  top: 0
+  left: 0
+  pointer-events: none
+  transition: opacity 300ms
+
+.ui-side-nav
+  width: 72px
+  height: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  border-right: 1px solid var(--borderSoft)
+  padding: 20px 19px 92px 20px
+  background: var(--bgPrimary)
+  position: fixed
+  z-index: 999
+  top: 0
+  left: 0
+  transition: width 300ms
+
+  // The agency, and Edit menu's button after its chevron: the open
+  // sidebar is wider by the button and its gap, so the agency's name keeps
+  // the room it had (Avenue Two Travel whole).
+  .side-nav-logo
+    width: 100%
+    display: flex
+    align-items: center
+    gap: 4px
+    margin-bottom: 60px
+
+    // The logo's row up to Edit menu: the switcher's button, or a link with
+    // the mark and its name, a page's gap between them.
+    .side-nav-brand
+      flex: 1
+      min-width: 0
+      display: flex
+      align-items: center
+
+      > button:first-child
+        flex: 1
+        min-width: 0
+
+      > a
+        flex: 1
+        min-width: 0
+        display: flex
+        align-items: center
+        gap: 20px
+
+      .label
+        flex: 1
+        min-width: 0
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+        color: var(--textNormal)
+
+    // There with the labels only, as the sidebar opens, or while the
+    // keyboard is on it. Not a click's focus: Done kept it, and the
+    // closed rail showed the button over the agency's logo.
+    .nav-edit-toggle
+      display: flex
+      flex-shrink: 0
+      margin-left: auto
+      opacity: 0
+      transition: opacity 300ms
+
+      &:has(:focus-visible)
+        opacity: 1
+
+      // Bare beside the chevron, the kit's soft ground under the pointer;
+      // its ring only as Done, so the check doesn't read as the chevron's.
+      .ui-icon-button:not([aria-pressed="true"])
+        box-shadow: none
+
+    // The lone logo only: the agency switcher frames its own, and this rule
+    // rounded the logo inside that frame past the frame's corners.
+    .side-nav-brand > a > img,
+    .side-nav-brand > a > .ui-agency-mark
+      border-radius: 8px
+      box-shadow: 0 16px 16px -8px rgba(0, 0, 0, .4)
+
+  // While editing, the hint and Reset: in the room under the logo, over
+  // the pages' end, so the pages start where they did.
+  .nav-tools
+    height: 28px
+    margin: -44px 0 16px
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    gap: 4px
+
+    .hint
+      flex: 1
+      min-width: 0
+      color: var(--textSoft)
+      white-space: nowrap
+
+    .tool
+      display: flex
+
+  #menu
+    display: flex
+    flex-direction: column
+    gap: 24px
+
+    .disabled
+      opacity: .25
+      pointer-events: none
+
+    // A page while editing: taken anywhere but its eye and dragged where
+    // it stands; a hidden one softer.
+    .nav-row
+      cursor: grab
+      touch-action: none
+      user-select: none
+
+      .nav-grip
+        position: absolute
+        top: 50%
+        left: 5px
+        transform: translateY(-50%)
+        display: flex
+        color: var(--textSoft)
+        transition: color 150ms
+
+      &:hover .nav-grip,
+      &.held .nav-grip
+        color: var(--highlight)
+
+      // The page's mark and name take the row, its eye at the end (the
+      // eye's tooltip wraps it in its own box).
+      .nav-content
+        flex: 1
+
+      .eye
+        display: flex
+        flex-shrink: 0
+
+      &.off .nav-content
+        opacity: .4
+
+      // In hand: lifted over the pages it passes.
+      &.held
+        z-index: 1
+        border-radius: 8px
+        background: var(--bgPrimary)
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .12)
+        cursor: grabbing
+
+    // While a page is in hand, only it reads as held.
+    &.sorting .nav-row:not(.held):hover p
+      color: var(--textSoft)
+
+    a,
+    .nav-row
+      width: calc(100% + 20px)
+      height: 32px
+      overflow: hidden
+      padding-right: 20px
+      display: flex
+      align-items: center
+      gap: 20px
+      position: relative
+
+      .nav-content
+        display: inline-flex
+        align-items: center
+        gap: 20px
+        min-width: 0
+
+      .nav-icon-wrapper
+        position: relative
+        flex-shrink: 0
+
+      .nav-badge
+        position: absolute
+        top: -4px
+        right: -4px
+        min-width: 16px
+        height: 16px
+        padding: 0 4px
+        border-radius: 8px
+        background: var(--negative500)
+        border: 1px solid var(--bgPrimary)
+        color: var(--gray50)
+        font-weight: 700
+        line-height: 12px
+        display: flex
+        align-items: center
+        justify-content: center
+
+      .ui-icon
+        flex-shrink: 0
+        margin: 4px
+
+      p
+        flex: 1
+        padding-right: 8px
+        color: var(--textSoft)
+        white-space: nowrap
+        display: flex
+        align-items: center
+        justify-content: space-between
+        gap: 8px
+        transition: color 300ms
+
+      &:hover
+        p
+          color: var(--highlight)
+
+      &.active
+        p
+          color: var(--highlight)
+
+        &::after
+          content: ''
+          width: 2px
+          height: 100%
+          border-radius: 1px
+          background: var(--highlight)
+          position: absolute
+          top: 0
+          right: 0
+
+    // Editing, a row reaches into the sidebar's left margin with its grip
+    // there, so the pages' marks stay where they were. After the rule
+    // above, whose width it widens.
+    .nav-row
+      margin-left: -18px
+      padding-left: 18px
+      width: calc(100% + 38px)
+
+    figure
+      width: 100%
+      height: 1px
+      background-color: var(--borderSoft)
+
+    .ui-spinner
+      background-color: transparent
+
+  // Open, it lies over the page (the layout keeps the closed rail's room),
+  // so its width moves nothing else. 240px, and Edit menu's button and gap.
+  &:hover,
+  &.expanded
+    width: 272px
+
+    .side-nav-logo .nav-edit-toggle
+      opacity: 1
+
+    & + .ui-side-nav-overlay
+      opacity: .8
+
+// Dark: the dark grey --bgHard is without a brand.
+.dark .ui-side-nav-overlay
+  background: var(--gray800)
+/* End: SIDE NAV */
+
+/* INPUTS */
+// Text input (base)
+.ui-text-input
+  position: relative
+
+  input,
+  textarea
+    @extend .t-xs
+    // Form controls don't inherit the page's font: a textarea fell back to
+    // the browser's monospace.
+    font-family: inherit
+    width: 100%
+    height: 40px
+    border-radius: 8px
+    padding: 0 16px
+    background: var(--bgPrimary)
+    box-shadow: inset 0 0 0 1px var(--borderSoft)
+    color: var(--highlight)
+
+    &::placeholder
+      color: var(--highlight)
+      opacity: .5
+
+    &:focus
+      box-shadow: 0 0 0 2px var(--borderMedium)
+
+    &:not(:placeholder-shown) + label
+      @extend .t-xxxs
+      max-width: calc(100% - 24px)
+      padding: 0 4px
+      background: var(--bgPrimary)
+      opacity: 1
+      top: -8px
+      left: 12px
+
+    &:disabled
+      background: var(--bgMedium)
+      box-shadow: none
+      color: var(--textSoft)
+
+      & + label
+        display: none
+
+  // One line inside the field: a label longer than a narrow field ends in an
+  // ellipsis instead of wrapping out of it.
+  > label
+    @extend .t-xs
+    max-width: calc(100% - 32px)
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    opacity: .5
+    position: absolute
+    top: 8px
+    left: 16px
+    pointer-events: none
+    transition: all 150ms
+
+  .ui-spinner
+    position: absolute
+    top: 12px
+    right: 12px
+
+  &.icon
+    input
+      padding-left: 40px
+
+      &:not(:placeholder-shown) + label
+        left: 36px
+
+    > label
+      max-width: calc(100% - 56px)
+      left: 40px
+
+    .ui-icon
+      opacity: .5
+      position: absolute
+      top: 12px
+      left: 12px
+      pointer-events: none
+
+  > .error
+    padding-top: 8px
+    display: flex
+    align-items: center
+    padding: 8px
+
+    .ui-icon,
+    p
+      color: var(--textNegative)
+
+// Phone input
+.ui-phone-input
+  @extend .ui-text-input
+
+  // A named phone field: its name rests on the top border from the start,
+  // where a filled TextInput's label floats, since the dial code takes the
+  // spot inside.
+  &.labelled > label
+    @extend .t-xxxs
+    padding: 0 4px
+    background: var(--bgPrimary)
+    opacity: 1
+    top: -8px
+    left: 12px
+
+  // Disabled keeps its chevron, softened like a disabled date input's icon,
+  // so the number stays where it was.
+  input:disabled + button
+    color: var(--textSoft)
+    pointer-events: none
+
+  button
+    height: 24px
+    border-radius: 4px
+    padding: 0 8px
+    color: var(--highlight)
+    display: flex
+    align-items: center
+    gap: 8px
+    position: absolute
+    top: 8px
+    left: 8px
+    cursor: pointer
+    transition: background 300ms
+
+    .ui-icon
+      opacity: .5
+
+    &:hover
+      background: var(--bgSoft)
+
+// Date input
+.ui-date-input
+  @extend .ui-text-input
+
+  input
+    cursor: text
+
+    &:disabled + button
+      pointer-events: none
+
+      .ui-icon
+        color: var(--textSoft)
+
+  > label
+    @extend .t-xxxs
+    padding: 0 4px
+    background: var(--bgPrimary)
+    opacity: 1
+    top: -8px
+    left: 12px
+
+  > button
+    width: 32px
+    height: 32px
+    border-radius: 4px
+    position: absolute
+    top: 4px
+    right: 4px
+    cursor: pointer
+    transition: background 300ms
+
+    &:hover
+      background: var(--bgSoft)
+
+  .ui-calendar
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+// Time input
+.ui-time-input
+  @extend .ui-text-input
+
+  input
+    display: flex
+    align-items: center
+
+    &::-webkit-datetime-edit,
+    &::-webkit-datetime-edit-hour-field,
+    &::-webkit-datetime-edit-minute-field
+      padding: 0
+
+    &::-webkit-datetime-edit-ampm-field,
+    &::-webkit-calendar-picker-indicator
+      display: none
+
+  .ui-toggle
+    width: 80px
+    position: absolute
+    top: 8px
+    right: 8px
+
+// Number input
+.ui-number-input
+  @extend .ui-text-input
+
+  input
+    padding-inline: 40px
+    text-align: center
+
+    // The stepper buttons overlap the field's edges, so the text input's
+    // OUTER focus ring bled out from behind them — keep this one's inset.
+    &:focus
+      box-shadow: inset 0 0 0 2px var(--borderMedium)
+
+    &:disabled
+      & + .ui-nav-button,
+      & + .ui-nav-button + .ui-nav-button
+        display: none
+
+  .ui-nav-button
+    position: absolute
+    z-index: 1
+    top: 10px
+
+    &:nth-child(2)
+      left: 10px
+
+    &:last-child
+      right: 10px
+
+// Price input
+.ui-price-input
+  @extend .ui-text-input
+
+  input
+    text-align: right
+
+    &:disabled + select
+      padding-right: 8px
+      background: transparent
+      color: var(--textSoft)
+      pointer-events: none
+
+  b
+    @extend .t-xs
+    position: absolute
+    top: 8px
+    left: 16px
+    pointer-events: none
+
+  select
+    @extend .t-xs
+    height: 24px
+    border-radius: 4px
+    padding: 0 24px 0 8px
+    background: url('../assets/dropdown-black.svg') right 8px top 8px no-repeat
+    position: absolute
+    top: 8px
+    left: 8px
+    cursor: pointer
+    transition: background-color 300ms
+
+    &:hover
+      background-color: var(--bgSoft)
+
+.dark
+  .ui-price-input
+    select
+      background-image: url('../assets/dropdown-white.svg')
+
+// Payment input
+.ui-card-input
+  width: 100%
+  height: 40px
+  border-radius: 8px
+  overflow: hidden
+  background: var(--bgPrimary)
+  box-shadow: inset 0 0 0 1px var(--borderSoft)
+  color: var(--highlight)
+  display: flex
+  position: relative
+
+  &::placeholder
+    color: var(--highlight)
+    opacity: .5
+
+  &.focus
+    box-shadow: 0 0 0 2px var(--borderMedium)
+
+  img
+    width: 24px
+    height: 16px
+    position: absolute
+    top: 12px
+    left: 12px
+
+  input
+    @extend .t-xs
+    height: 100%
+    background: transparent
+
+    &:nth-child(2)
+      width: 60%
+      padding-left: 48px
+
+    &:nth-child(3),
+    &:last-child
+      width: 20%
+
+  &.without-cvv input:last-child
+    width: 40%
+
+  &.disabled
+    background: var(--bgMedium)
+    box-shadow: none
+    color: var(--textSoft)
+    pointer-events: none
+
+// Autocomplete
+.ui-autocomplete
+  position: relative
+
+  .ui-spinner
+    position: absolute
+    top: 12px
+    right: 12px
+
+// Text area
+.ui-text-area
+  @extend .ui-text-input
+
+  textarea
+    @extend .no-scrollbar
+    height: 120px
+    resize: none
+    padding: 8px 16px
+/* End: INPUTS */
+
+/* MODAL */
+.ui-modal
+  @extend .no-scrollbar
+  width: 400px
+  // Long content (forms, lists) scrolls inside the box instead of pushing
+  // it past the viewport — desktop had no ceiling at all.
+  max-height: calc(100dvh - 96px)
+  border-radius: 24px
+  overflow-y: auto
+  overflow-x: hidden
+  border: 1px solid var(--borderMedium)
+  padding: 15px
+  background: var(--bgPrimary)
+  display: flex
+  flex-direction: column
+  gap: 48px
+
+  &.no-content
+    gap: 10px
+
+  > header
+    padding: 8px 8px 0
+    display: flex
+    gap: 16px
+
+    h6
+      flex: 1
+      word-break: break-all
+
+    .ui-nav-button
+      flex-shrink: 0
+      margin-top: 4px
+
+  > div
+    flex-grow: 1
+    min-height: 0
+    padding: 0 8px
+
+  > .ui-button
+    width: 100%
+
+  // Phone-sized: the fixed 400px box overflowed a 375px screen and sat flush
+  // against the edges, and 48px of gap made every modal feel oversized.
+  // Nothing to opt into — the modal adapts to the viewport it's in.
+  @media (max-width: 600px)
+    width: 100%
+    max-width: calc(100vw - 32px)
+    max-height: calc(100dvh - 96px)
+    border-radius: 20px
+    gap: 28px
+    padding: 12px
+
+    > header
+      padding: 6px 6px 0
+
+      h6
+        word-break: normal
+        overflow-wrap: anywhere
+
+    > div
+      padding: 0 6px
+/* End: MODAL */
+
+/* NAV BUTTON */
+.ui-nav-button
+  border-radius: 50%
+  background: var(--bgSoft)
+  color: var(--highlight)
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  transition: background 300ms
+
+  &.l
+    width: 40px
+    height: 40px
+
+  &.s
+    width: 20px
+    height: 20px
+
+  &:hover
+    background: var(--bgMedium)
+/* End: NAV BUTTON */
+
+/* OVERLAY */
+.ui-overlay
+  width: 100vw
+  height: 100vh
+  background: rgba(217, 217, 217, .9)
+  display: flex
+  align-items: center
+  justify-content: center
+  position: fixed
+  z-index: 1000
+  top: 0
+  left: 0
+  animation: overlay 300ms var(--easeOutBack) forwards
+
+  @keyframes overlay
+    from
+      transform: scale(0.75)
+      opacity: 0
+
+    to
+      transform: none
+      opacity: 1
+
+  > figure
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: -1
+    top: 0
+    left: 0
+
+.dark
+  .ui-overlay
+    background: rgba(64, 64, 64, .9)
+/* End: OVERLAY */
+
+/* PAGINATOR */
+.ui-paginator
+  @extend .t-xxs
+  color: var(--textNormal)
+  display: flex
+  gap: 24px
+
+  p
+    white-space: nowrap
+
+  > :first-child
+    display: flex
+    gap: 8px
+
+    select
+      @extend .t-xxs
+      height: 20px
+      border-radius: 10px
+      background: var(--bgSoft) url('../assets/dropdown-black.svg') right 8px center no-repeat
+      padding-inline: 8px 20px
+      cursor: pointer
+      transition: 300ms
+
+      &:hover
+        background-color: var(--bgMedium)
+
+  > :last-child
+    display: flex
+    gap: 12px
+
+.dark
+  .ui-paginator
+    > :first-child
+      select
+        background-image: url('../assets/dropdown-white.svg')
+/* End: PAGINATOR */
+
+/* SELECT */
+.ui-select
+  @extend .t-xs
+  width: 100%
+  height: 40px
+  border-radius: 8px
+  padding: 0 16px
+  background: var(--bgPrimary) url('../assets/dropdown-black.svg') right 15px top 15px no-repeat
+  box-shadow: inset 0 0 0 1px var(--borderSoft)
+  cursor: pointer
+  transition: border-color 150ms
+
+  &:focus
+    box-shadow: 0 0 0 2px var(--borderMedium)
+
+  // Unanswered, it shows its placeholder muted like an input's, so the
+  // question never reads as its own answer.
+  &:has(> option:disabled:checked)
+    color: var(--textSoft)
+
+  option
+    color: var(--highlight)
+
+    &:disabled
+      color: var(--textSoft)
+
+  &:disabled
+    background: var(--bgMedium) !important
+    box-shadow: none
+    color: var(--textSoft)
+    pointer-events: none
+
+.dark
+  .ui-select
+    background-image: url('../assets/dropdown-white.svg')
+/* End: SELECT */
+
+/* SEPARATOR */
+.ui-separator
+  background: var(--borderSoft)
+
+  &.vertical
+    width: 1px !important
+
+  &.horizontal
+    height: 1px !important
+/* End: SEPARATOR */
+
+/* SLIDER */
+.ui-slider
+  height: 20px
+  position: relative
+
+  &::before
+    content: ''
+    width: 100%
+    height: 4px
+    border-radius: 4px
+    background: var(--borderMedium)
+    position: absolute
+    top: 8px
+    left: 0
+
+  figure
+    height: 4px
+    margin: 0
+    border-radius: 2px
+    background: var(--highlight)
+    position: absolute
+    top: 8px
+
+  input
+    width: 100%
+    height: 4px
+    background: transparent
+    position: absolute
+    top: 8px
+    left: 0
+    margin: 0
+    pointer-events: none
+    // Without it WebKit keeps its native thumb and ignores the one below.
+    -webkit-appearance: none
+    appearance: none
+
+    &::-ms-track
+      opacity: 0
+
+    &::-webkit-slider-thumb
+      -webkit-appearance: none
+      appearance: none
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      border: 1px solid var(--borderHard)
+      background: var(--bgPrimary)
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1)
+      cursor: pointer
+      pointer-events: all
+
+    &::-moz-range-thumb
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      border: 1px solid var(--borderHard)
+      background: var(--bgPrimary)
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1)
+      cursor: pointer
+      pointer-events: all
+
+    &::-ms-thumb
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      border: 1px solid var(--borderHard)
+      background: var(--bgPrimary)
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1)
+      cursor: pointer
+      pointer-events: all
+/* End: SLIDER */
+
+/* SPINNER */
+.ui-spinner
+  width: 24px
+  height: 24px
+  background-color: currentColor
+  -webkit-mask-image: url(../assets/spinner-black.png)
+  -webkit-mask-repeat: no-repeat
+  -webkit-mask-size: contain
+  mask-image: url(../assets/spinner-black.png)
+  mask-repeat: no-repeat
+  mask-size: contain
+  animation: spinner linear 300ms infinite
+
+  @keyframes spinner
+    to
+      transform: rotate(360deg)
+
+/* End: SPINNER */
+
+/* SWITCH */
+.ui-switch
+  background: var(--bgSoft)
+  box-shadow: inset 0 0 0 1px var(--bgHard)
+  position: relative
+  cursor: pointer
+  transition: background 300ms
+
+  &::after
+    content: ''
+    border-radius: 50%
+    background: white
+    position: absolute
+    transition: left 300ms var(--easeOutBack)
+
+  &.l
+    width: 48px
+    height: 32px
+    border-radius: 16px
+
+    &::after
+      width: 16px
+      height: 16px
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2)
+      top: 8px
+      left: 8px
+
+    &.checked::after
+      left: 24px
+
+  &.s
+    width: 36px
+    height: 24px
+    border-radius: 12px
+
+    &::after
+      width: 12px
+      height: 12px
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .2)
+      top: 6px
+      left: 6px
+
+    &.checked::after
+      left: 18px
+
+  &:hover
+    background: var(--bgMedium)
+
+  &:focus
+    box-shadow: 0 0 0 2px var(--borderMedium)
+
+  &.checked
+    background: var(--brandBg)
+    box-shadow: none
+
+  &:disabled
+    background: var(--bgHard)
+    box-shadow: none
+    pointer-events: none
+
+    &::after
+      background: var(--textSoft)
+      box-shadow: none
+/* End: SWITCH */
+
+/* TABLE */
+.ui-table
+  > header
+    border-bottom: 1px solid var(--borderSoft)
+    padding: 10px 20px
+    display: flex
+
+    p,
+    b
+      @extend .t-xxs
+      font-weight: normal !important
+      flex: 1
+
+      &.right
+        text-align: right
+
+  > ul
+    list-style: none
+
+    > li
+      @extend .t-xs
+      min-height: 64px
+      border-bottom: 1px solid var(--borderSoft)
+      padding: 20px
+      display: flex
+      flex-direction: column
+      justify-content: center
+      gap: 8px
+
+      &.dropdown
+        @extend .t-xxs
+        padding-block: 8px
+        background: var(--bgSoft)
+        gap: 4px
+
+      .row
+        display: flex
+        align-items: center
+
+        > div
+          flex: 1
+          color: var(--textNormal)
+          display: flex
+          align-items: center
+          gap: 20px
+
+          &.right
+            justify-content: flex-end
+
+          .actions
+            position: relative
+
+            .ui-actions
+              top: calc(100% + 4px)
+              right: 0
+/* TABLE */
+
+/* TABS */
+.ui-tabs
+  display: flex
+  position: relative
+
+  p
+    position: relative
+    padding: 0 20px 12px
+
+    .count
+      margin-left: 8px
+      padding: 1px 7px
+      border-radius: 999px
+      background: var(--bgSoft)
+      color: var(--textSoft)
+
+    // Something in the tab waits, unsaved: the brand's dot. It sits in the
+    // tab's own right padding, centred on the label's line, so showing it
+    // moves neither the tabs after it nor the underline.
+    .mark
+      position: absolute
+      top: calc(50% - 9px)
+      right: 8px
+      width: 6px
+      height: 6px
+      border-radius: 50%
+      background: var(--brandBg)
+    color: var(--textNormal)
+    cursor: pointer
+    transition: color 300ms
+
+    &:hover,
+    &.active
+      color: var(--highlight)
+
+  figure
+    height: 2px
+    background: var(--highlight)
+    position: absolute
+    bottom: 0
+    transition: all 300ms var(--easeOutExpo)
+/* End: TABS */
+
+/* TAG */
+.ui-tag
+  @extend .t-xxs
+  border-radius: 4px
+  padding-inline: 8px
+  white-space: nowrap
+  display: inline-flex
+  align-items: center
+  gap: 8px
+
+  button
+    display: flex
+    opacity: .5
+    cursor: pointer
+    transition: opacity 150ms
+
+    &:hover
+      opacity: 1
+
+  &.default
+    background: var(--bgSoft)
+    color: var(--textNormal)
+
+  &.positive
+    background: var(--bgPositive)
+    color: var(--textPositive)
+
+  &.warning
+    background: var(--bgWarning)
+    color: var(--textWarning)
+
+  &.negative
+    background: var(--bgNegative)
+    color: var(--textNegative)
+
+  &.disabled
+    background: var(--bgSoft)
+    color: var(--textSoft)
+/* End: TAG */
+
+/* TOAST */
+.ui-toast
+  height: 40px
+  border-radius: 12px
+  border: 1px solid var(--borderHard)
+  padding-inline: 7px
+  background: var(--bgPrimary)
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .1)
+  display: flex
+  align-items: center
+  gap: 16px
+  position: fixed
+  z-index: 1000
+  bottom: 40px
+  left: 50%
+  animation: toast 600ms var(--easeOutBack) forwards
+
+  // A phone gets the full width: sized to its one-line content the toast
+  // squeezed long copy into a tall three-line sliver.
+  @media (max-width: 768px)
+    width: calc(100vw - 32px)
+    height: auto
+    min-height: 40px
+    padding-block: 8px
+
+    p
+      flex: 1
+
+  @keyframes toast
+    from
+      opacity: 0
+      transform: translate(-50%, 100%)
+
+    to
+      opacity: 1
+      transform: translateX(-50%)
+
+  figure,
+  button
+    width: 24px
+    height: 24px
+    border-radius: 4px
+    display: flex
+    align-items: center
+    justify-content: center
+
+  p
+    @extend .t-xxs
+
+  svg
+    width: 24px
+    height: 24px
+
+    path
+      fill: none
+      stroke: var(--highlight)
+      stroke-linecap: round
+      stroke-width: 2px
+      stroke-dashoffset: 44px
+      animation: toggleSVGPath 5s linear forwards
+
+      @keyframes toggleSVGPath
+        from
+          stroke-dasharray: 44px
+
+        to
+          stroke-dasharray: 88px
+
+  button
+    cursor: pointer
+    transition: background 150ms
+
+    &:hover
+      background: rgba(0, 0, 0, .05)
+
+  // Undo and its like: the label underlined after the message, before the
+  // ring.
+  button.action
+    @extend .t-xxs
+    width: auto
+    padding: 0 6px
+    gap: 6px
+    color: var(--highlight)
+    font-weight: 600
+    text-decoration: underline
+    text-underline-offset: 3px
+    white-space: nowrap
+
+  &.info figure
+    background: var(--bgMedium)
+
+  &.success figure
+    background: var(--bgPositive)
+    color: var(--textPositive)
+
+  &.warning figure
+    background: var(--bgWarning)
+    color: var(--textWarning)
+
+  &.error figure
+    background: var(--bgNegative)
+    color: var(--textNegative)
+/* End: TOAST */
+
+/* TOOGLE */
+// Equal columns, each as wide as the longest label: the sliding figure is
+// one column wide, so a longer label (Agency next to Mine) used to push
+// its button past the figure and leave both labels off-centre.
+.ui-toggle
+  overflow: hidden
+  background: var(--bgSoft)
+  // Equal columns: the highlight is one equal part, whatever each label measures.
+  display: grid
+  grid-auto-flow: column
+  grid-auto-columns: 1fr
+  position: relative
+  z-index: 1
+
+  figure
+    background: var(--bgPrimary)
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .2)
+    position: absolute
+    z-index: -1
+    transition: transform 300ms var(--easeOutExpo)
+
+  button
+    @extend .t-xxs
+    cursor: pointer
+    transition: color 150ms
+    white-space: nowrap
+    padding-inline: 12px
+
+    &.active
+      pointer-events: none
+
+    &:not(.active)
+      color: var(--textSoft)
+
+      &:hover
+        color: var(--highlight)
+
+    // A view's icon before its name.
+    &.with-icon
+      display: inline-flex
+      align-items: center
+      justify-content: center
+      gap: 6px
+
+  &.xl
+    width: 100%
+    height: 40px
+    border-radius: 12px
+    padding: 4px
+
+    figure
+      height: 32px
+      border-radius: 8px
+      top: 4px
+      left: 4px
+
+  &.l
+    height: 40px
+    border-radius: 12px
+    padding: 4px
+
+    figure
+      height: 32px
+      border-radius: 8px
+      top: 4px
+      left: 4px
+
+  &.s
+    height: 24px
+    border-radius: 6px
+    padding: 2px
+
+    figure
+      height: 20px
+      border-radius: 4px
+      top: 2px
+      left: 2px
+
+  &.disabled
+    background: var(--bgHard)
+    pointer-events: none
+
+    figure
+      background: var(--bgMedium)
+      box-shadow: none
+
+    button
+      &.active
+        color: var(--textNormal)
+/* End: TOOGLE */
+
+// REVISAR
+/* DRAWER */
+.ui-drawer
+  width: 100vw
+  height: 100vh
+  display: flex
+  flex-direction: column
+  position: fixed
+  z-index: 1000
+  top: 0
+  left: 0
+  animation: drawer 600ms var(--easeOutExpo) forwards
+
+  @keyframes drawer
+    from
+      background: transparent
+
+    to
+      background: rgba(230, 230, 230, .8)
+
+  > figure
+    flex: 1
+    min-height: 80px
+
+  > div
+    border-radius: 16px 16px 0 0
+    padding: 16px 16px 0
+    background: white
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 16px
+    animation: drawerDiv 600ms var(--easeOutExpo) forwards
+
+    @keyframes drawerDiv
+      from
+        transform: translateY(100%)
+
+      to
+        transform: none
+
+    &::before
+      flex-shrink: 0
+      content: ''
+      width: 20px
+      height: 1px
+      border-radius: .5px
+      background: var(--gray200)
+
+    > div
+      width: 100%
+
+  &.scrolleable
+    > figure
+      flex: 0
+
+    > div
+      @extend .no-scrollbar
+      flex: 1
+      overflow-y: auto
+
+// Dark
+.dark
+  .ui-drawer
+    animation-name: darkDrawer
+
+    @keyframes darkDrawer
+      from
+        background: transparent
+
+      to
+        background: rgba(26, 26, 26, .8)
+
+    > div
+      background: black
+
+      &::before
+        background: var(--gray800)
+/* End: DRAWER */
+
+/* TOOLTIP */
+.ui-tooltip
+  position: relative
+  cursor: help
+
+  &.disabled
+    cursor: inherit
+
+// On body, fixed: placed by the component in viewport coordinates.
+.ui-tooltip-bubble
+  position: fixed
+  // Above every popover and card: nothing is meant to sit over a hint.
+  z-index: 1300
+  width: max-content
+  padding: 4px
+  // The border tokens, so an agency's brand tints it like every card and
+  // input; Nicer's own theme keeps gray200 here and gray800 in dark.
+  border: 1px solid var(--borderHard)
+  border-radius: 4px
+  background: var(--bgPrimary)
+  color: var(--highlight)
+  line-height: 1.4
+  overflow-wrap: break-word
+  white-space: normal
+  pointer-events: none
+
+// Dark
+.dark
+  .ui-tooltip-bubble
+    border-color: var(--borderMedium)
+/* End: TOOLTIP */
