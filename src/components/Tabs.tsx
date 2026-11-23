@@ -8,8 +8,8 @@ import {
 } from "react";
 
 interface Tab {
-  /** Shown as a small badge after the label (e.g. a queue size). */
-  count?: number;
+  /** Shown as a small badge after the label (e.g. a queue size, or "10,000+"). */
+  count?: number | string;
   label: string;
   /** A small dot after the label: something in the tab waits, unsaved. */
   mark?: boolean;

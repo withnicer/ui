@@ -43,6 +43,11 @@ export type TourStep = Omit<Step, "skipBeacon"> & {
   bringsOwnTarget?: boolean;
   /** How long a `bringsOwnTarget` step waits for its target, then is passed over. */
   targetWaitMs?: number;
+  /**
+   * Clicking the target moves the tour on, as Next does: for a step that asks
+   * the person to click it (a menu, then the option it opens).
+   */
+  advanceOnTargetClick?: boolean;
   /** Glides the target into view, if it isn't, before the step shows. */
   scrollToTarget?: boolean;
   /**
@@ -208,11 +213,14 @@ function CustomTooltip({
 }
 
 function PersistentSpotlight({
+  clickable = false,
   shape,
   run,
   target,
   visible,
 }: {
+  /** A click on the target goes through to it, past the click blocker. */
+  clickable?: boolean;
   run: boolean;
   shape?: "compact";
   target: string | null;
@@ -303,7 +311,18 @@ function PersistentSpotlight({
   return createPortal(
     <>
       <ClickBlocker />
-      <SpotlightBox style={boxStyle} />
+      {/* The hole itself takes a click meant for the target: it sits over
+          it, so a step that asks for that click passes it on. */}
+      <SpotlightBox
+        className={clickable ? "clickable" : undefined}
+        onClick={() => {
+          const element = target ? document.querySelector(target) : null;
+          if (clickable && element instanceof HTMLElement) {
+            element.click();
+          }
+        }}
+        style={boxStyle}
+      />
       <HoleCover style={{ ...boxStyle, opacity: visible ? 0 : 1 }} />
     </>,
     document.body
@@ -491,110 +510,149 @@ export default function Tour({ steps, run, setRun, onClose }: TourProps) {
     };
   }, [run, stepIndex, resolvedSteps]);
 
+  const closeTour = () => {
+    setVisible(false);
+    setRun(false);
+    inTransition.current = false;
+    onClose?.();
+  };
+
+  const showStep = (nextIndex: number, direction: 1 | -1) => {
+    const step = resolvedSteps[nextIndex];
+    // Ran off an end looking for a step with something to point at.
+    if (!step) {
+      inTransition.current = false;
+      if (direction === 1) {
+        closeTour();
+      } else {
+        setVisible(true);
+      }
+      return;
+    }
+
+    // Put the next step's target on screen BEFORE the swap, so it exists by
+    // the time Joyride positions against it.
+    step.onBeforeStep?.();
+
+    // Fade out → swap step while hidden → fade back in.
+    setVisible(false);
+
+    const startedAt = Date.now();
+    const settle = () => {
+      if (!running.current) {
+        return;
+      }
+      const element =
+        typeof step.target === "string"
+          ? document.querySelector(step.target)
+          : null;
+      // A page the step just opened may still be loading its target; one
+      // that never comes would stall Joyride, so the tour moves past it.
+      if (step.bringsOwnTarget && !element?.getClientRects().length) {
+        if (Date.now() - startedAt < (step.targetWaitMs ?? TARGET_WAIT_MS)) {
+          window.setTimeout(settle, TARGET_RETRY_MS);
+        } else {
+          setPassedOver((passed) =>
+            passed.includes(nextIndex) ? passed : [...passed, nextIndex]
+          );
+          showStep(nextIndex + direction, direction);
+        }
+        return;
+      }
+      const arrive = () => {
+        if (!running.current) {
+          return;
+        }
+        setStepIndex(nextIndex);
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setVisible(true);
+            inTransition.current = false;
+          });
+        });
+      };
+      if (step.scrollToTarget && element) {
+        void scrollToMiddle(element).then(arrive);
+      } else {
+        arrive();
+      }
+    };
+
+    window.setTimeout(settle, FADE_MS);
+  };
+
+  /** Moves one step on or back from `index`, as the Next and Back buttons do. */
+  const move = (index: number, direction: 1 | -1) => {
+    const nextIndex = index + direction;
+
+    if (nextIndex >= resolvedSteps.length) {
+      closeTour();
+      return;
+    }
+
+    if (nextIndex < 0) {
+      return;
+    }
+
+    if (inTransition.current) {
+      return;
+    }
+    inTransition.current = true;
+
+    showStep(nextIndex, direction);
+  };
+
+  // A step whose target the person clicks moves on as Next would: they did
+  // what the step asked. The click is held while the bubble fades with its
+  // target still there, then the target's own action runs: a menu option
+  // that closes its menu at once left the bubble fading toward the corner.
+  useEffect(() => {
+    const step = resolvedSteps[stepIndex];
+    if (
+      !(
+        run &&
+        visible &&
+        step?.advanceOnTargetClick &&
+        typeof step.target === "string"
+      )
+    ) {
+      return;
+    }
+    const target = step.target;
+    const onClick = (event: MouseEvent) => {
+      const clicked = (event.target as Element | null)?.closest?.(target);
+      if (!(clicked instanceof HTMLElement)) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      setVisible(false);
+      window.setTimeout(() => {
+        clicked.click();
+        move(stepIndex, 1);
+      }, FADE_MS);
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  });
+
   const handleCallback = (data: EventData) => {
     const { status, type, action, index } = data;
 
     const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED];
     const isClosed = action === ACTIONS.CLOSE;
 
-    const closeTour = () => {
-      setVisible(false);
-      setRun(false);
-      inTransition.current = false;
-      onClose?.();
-    };
-
     if (finishedStatuses.includes(status) || isClosed) {
       closeTour();
       return;
     }
 
-    const showStep = (nextIndex: number, direction: 1 | -1) => {
-      const step = resolvedSteps[nextIndex];
-      // Ran off an end looking for a step with something to point at.
-      if (!step) {
-        inTransition.current = false;
-        if (direction === 1) {
-          closeTour();
-        } else {
-          setVisible(true);
-        }
-        return;
-      }
-
-      // Put the next step's target on screen BEFORE the swap, so it exists by
-      // the time Joyride positions against it.
-      step.onBeforeStep?.();
-
-      // Fade out → swap step while hidden → fade back in.
-      setVisible(false);
-
-      const startedAt = Date.now();
-      const settle = () => {
-        if (!running.current) {
-          return;
-        }
-        const element =
-          typeof step.target === "string"
-            ? document.querySelector(step.target)
-            : null;
-        // A page the step just opened may still be loading its target; one
-        // that never comes would stall Joyride, so the tour moves past it.
-        if (step.bringsOwnTarget && !element?.getClientRects().length) {
-          if (Date.now() - startedAt < (step.targetWaitMs ?? TARGET_WAIT_MS)) {
-            window.setTimeout(settle, TARGET_RETRY_MS);
-          } else {
-            setPassedOver((passed) =>
-              passed.includes(nextIndex) ? passed : [...passed, nextIndex]
-            );
-            showStep(nextIndex + direction, direction);
-          }
-          return;
-        }
-        const arrive = () => {
-          if (!running.current) {
-            return;
-          }
-          setStepIndex(nextIndex);
-
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              setVisible(true);
-              inTransition.current = false;
-            });
-          });
-        };
-        if (step.scrollToTarget && element) {
-          void scrollToMiddle(element).then(arrive);
-        } else {
-          arrive();
-        }
-      };
-
-      window.setTimeout(settle, FADE_MS);
-    };
-
     if (
       type === EVENTS.STEP_AFTER &&
       (action === ACTIONS.NEXT || action === ACTIONS.PREV)
     ) {
-      const nextIndex = action === ACTIONS.NEXT ? index + 1 : index - 1;
-
-      if (nextIndex >= resolvedSteps.length) {
-        closeTour();
-        return;
-      }
-
-      if (nextIndex < 0) {
-        return;
-      }
-
-      if (inTransition.current) {
-        return;
-      }
-      inTransition.current = true;
-
-      showStep(nextIndex, action === ACTIONS.NEXT ? 1 : -1);
+      move(index, action === ACTIONS.NEXT ? 1 : -1);
     }
   };
 
@@ -617,6 +675,9 @@ export default function Tour({ steps, run, setRun, onClose }: TourProps) {
     <>
       {run && <FloaterVisibilityStyle $fadeMs={FADE_MS} $visible={visible} />}
       <PersistentSpotlight
+        clickable={
+          run && resolvedSteps[stepIndex]?.advanceOnTargetClick === true
+        }
         run={run}
         shape={currentShape}
         target={currentTarget}
@@ -685,6 +746,10 @@ const SpotlightBox = styled.div`
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
   pointer-events: auto;
   z-index: 1098;
+
+  &.clickable {
+    cursor: pointer;
+  }
 `;
 
 const HoleCover = styled.div`
@@ -700,6 +765,11 @@ const FloaterVisibilityStyle = createGlobalStyle<{
   $fadeMs: number;
   $visible: boolean;
 }>`
+  /* Joyride 3 names them react-joyride__*; the __floater names are its
+     older ones. Without these the arrow stayed on screen while the bubble
+     faded, and showed in the corner when its target went away. */
+  .react-joyride__floater,
+  .react-joyride__arrow,
   .__floater,
   .__floater__arrow,
   .__floater__arrow span {
@@ -750,6 +820,28 @@ const TooltipCard = styled.div`
   .content {
     color: var(--textNormal);
     line-height: 1.6;
+
+    /* A step that lists what a place holds: a lead line, then its points. */
+    p {
+      margin: 0;
+    }
+
+    ul {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    li::marker {
+      color: var(--textSoft);
+    }
+
+    b {
+      color: var(--highlight);
+      font-weight: 600;
+    }
   }
 
   .tooltip-bottom {
