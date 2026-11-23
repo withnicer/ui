@@ -54,10 +54,9 @@ The toolchain is [Vite+](https://viteplus.dev) (`vp`) with bun as the package ma
 | Command | What it does |
 | --- | --- |
 | `vp install` | Install dependencies |
-| `vp dev` | Start the Vite dev server |
 | `vp check` | Format check, lint ([Ultracite](https://www.ultracite.ai) rules on Oxlint) and type check |
 | `vp check --fix` | Format and apply safe lint fixes |
-| `vp run build` | Build `dist/` (ES module and type declarations) |
+| `vp run build` | Build `dist/` with `vp pack`: one ES module and its bundled type declarations |
 | `vp test` | Run the unit tests |
 
 ## Release

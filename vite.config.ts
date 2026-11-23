@@ -5,31 +5,24 @@ import core from "ultracite/oxlint/core";
 import reactLint from "ultracite/oxlint/react";
 import { defineConfig } from "vite-plus";
 
-import pkg from "./package.json" with { type: "json" };
-
-// The apps bring their own React, styled-components and the rest: bundling a
-// second copy would split React context and styled-components themes.
-const external = [
-  ...Object.keys(pkg.dependencies),
-  ...Object.keys(pkg.peerDependencies),
-];
-
-// One file for the whole toolchain: `vp build` (library), `vp check` (format,
+// One file for the whole toolchain: `vp pack` (library), `vp check` (format,
 // lint, types), `vp test`.
 export default defineConfig({
   plugins: [react()],
 
-  // `vp build`: one ES module. Styles ship as Sass source. Declarations come
-  // from tsc (see the build script).
-  build: {
-    lib: {
-      entry: "./src/index.ts",
-      fileName: () => "index.js",
-      formats: ["es"],
-    },
-    rollupOptions: {
-      external: (id) =>
-        external.some((name) => id === name || id.startsWith(`${name}/`)),
+  // `vp pack` (tsdown): one ES module and one bundled index.d.ts. Every
+  // dependency and peer dependency stays external, so the app brings its own
+  // React and styled-components (one React context, one theme). Styles ship as
+  // Sass source, not through this build.
+  pack: {
+    entry: ["src/index.ts"],
+    format: "esm",
+    platform: "browser",
+    dts: { tsconfig: "tsconfig.app.json" },
+    loader: {
+      ".jpg": "dataurl",
+      ".png": "dataurl",
+      ".svg": "dataurl",
     },
   },
 
