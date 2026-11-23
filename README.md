@@ -13,12 +13,6 @@ bun add -d sass
 
 React, React DOM and styled-components are peer dependencies, so the app and the kit share one copy of each (one React context, one theme).
 
-The Nicer apps install it under its old name, so their imports stay `@nicer/ui`:
-
-```json
-{ "dependencies": { "@nicer/ui": "npm:@withnicer/ui@^1.0.0" } }
-```
-
 ## Use
 
 Load the styles once, at the app root, then import components:
@@ -72,4 +66,4 @@ Releases are automatic. Every push to `main` runs the [Release workflow](.github
 | `feat!: Rename Toggle's value prop` or a `BREAKING CHANGE:` footer | major   |
 | `docs:`, `chore:`, `ci:`, `test:`, `refactor:`                     | none    |
 
-Publishing uses the `NPM_TOKEN` secret of the withnicer GitHub organization.
+Publishing uses npm [trusted publishing](https://docs.npmjs.com/trusted-publishers): npm trusts this repository's `release.yml` through OpenID Connect, so there is no npm token to store or rotate.

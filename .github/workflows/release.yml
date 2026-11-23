@@ -26,7 +26,7 @@ jobs:
       contents: write # tags and GitHub releases
       issues: write # release comments on issues
       pull-requests: write # release comments on pull requests
-      id-token: write # npm provenance and, later, trusted publishing
+      id-token: write # npm trusted publishing (OIDC): no npm token
     steps:
       - uses: actions/checkout@v5
         with:
@@ -42,4 +42,3 @@ jobs:
         run: vp run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

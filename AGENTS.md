@@ -1,6 +1,6 @@
 # Agent instructions
 
-`@withnicer/ui` is Nicer's design system: React primitives, tokens and global styles, published to npm and installed by the Nicer apps as `@nicer/ui`. Read [README.md](README.md) for usage and the release flow.
+`@withnicer/ui` is Nicer's design system: React primitives, tokens and global styles, published to npm and installed by the Nicer apps. Read [README.md](README.md) for usage and the release flow.
 
 ## Rules
 
