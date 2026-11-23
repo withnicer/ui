@@ -49,15 +49,17 @@ Tokens and `.ui-*` classes live in [`src/styles/styles.sass`](src/styles/styles.
 
 ## Develop
 
-The toolchain is [Vite+](https://viteplus.dev) (`vp`) with bun as the package manager. Everything is configured in [`vite.config.ts`](vite.config.ts).
+Everything runs through [Vite+](https://viteplus.dev) (`vp`), configured in [`vite.config.ts`](vite.config.ts). Vite+ pins and installs the Node.js and bun versions itself; bun stays the package manager (`packageManager` in `package.json`), so `vp install` runs `bun install` on `bun.lock`.
 
 | Command | What it does |
 | --- | --- |
-| `vp install` | Install dependencies |
-| `vp check` | Format check, lint ([Ultracite](https://www.ultracite.ai) rules on Oxlint) and type check |
+| `vp install` | Install dependencies and the git hooks |
+| `vp check` | Format check ([Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)), lint ([Oxlint](https://oxc.rs/docs/guide/usage/linter.html) with [Ultracite](https://www.ultracite.ai) rules) and type check |
 | `vp check --fix` | Format and apply safe lint fixes |
-| `vp run build` | Build `dist/` with `vp pack`: one ES module and its bundled type declarations |
+| `vp pack` | Build `dist/`: one ES module and its bundled type declarations |
 | `vp test` | Run the unit tests |
+
+Git hooks live in [`.vite-hooks`](.vite-hooks): before a commit, `vp staged` runs `vp check --fix` on the staged files; the commit message must follow Conventional Commits, since releases are picked from it.
 
 ## Release
 

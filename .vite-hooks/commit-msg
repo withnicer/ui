@@ -1,0 +1,7 @@
+# semantic-release picks each version from these messages (README.md, Release).
+subject="$(head -n 1 "$1")"
+pattern='^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z0-9-]+\))?!?: .+'
+if ! printf '%s\n' "$subject" | grep -Eq "$pattern|^Merge |^Revert "; then
+  echo "Commit messages follow Conventional Commits, e.g. \"fix(button): Keep the focus ring\"." >&2
+  exit 1
+fi

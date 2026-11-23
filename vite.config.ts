@@ -6,7 +6,7 @@ import reactLint from "ultracite/oxlint/react";
 import { defineConfig } from "vite-plus";
 
 // One file for the whole toolchain: `vp pack` (library), `vp check` (format,
-// lint, types), `vp test`.
+// lint, types), `vp test` and `vp staged` (the pre-commit hook).
 export default defineConfig({
   plugins: [react()],
 
@@ -24,6 +24,11 @@ export default defineConfig({
       ".png": "dataurl",
       ".svg": "dataurl",
     },
+  },
+
+  // The pre-commit hook (.vite-hooks/pre-commit) runs this on staged files.
+  staged: {
+    "*": "vp check --fix",
   },
 
   fmt: {

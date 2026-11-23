@@ -33,11 +33,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vp pack",
-    "check": "vp check",
-    "fix": "vp check --fix",
-    "release": "semantic-release",
-    "test": "vp test run"
+    "prepare": "vp config --no-agent",
+    "release": "semantic-release"
   },
   "dependencies": {
     "aws-rum-web": "^3.2.1",

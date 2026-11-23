@@ -10,7 +10,7 @@
 - React, React DOM and styled-components stay peer dependencies.
 - Never swap a DOM element to satisfy an accessibility rule: keep the node and add `role`, `tabIndex={0}` and Enter/Space handling.
 - Lint debt is listed rule by rule in `vite.config.ts` with hit counts. Pay one off by fixing its sites by hand and deleting its line; do not run `vp check --fix-dangerously` across the repo, some fixes change behavior.
-- Validate with `vp check` and `vp pack`. Run tests only when a human explicitly asks for that test run.
+- Use `vp` for everything (install, check, pack, test); bun is the package manager underneath. Validate with `vp check` and `vp pack`. Run tests only when a human explicitly asks for that test run.
 - Commits follow Conventional Commits: a push to `main` releases `fix` as a patch, `feat` as a minor and `!` / `BREAKING CHANGE` as a major. Removing or renaming an export is breaking.
 
 <!--VITE PLUS START-->
